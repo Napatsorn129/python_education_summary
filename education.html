@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>EDUCATION SUMMARY</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="container">
+        <h1>EDUCATION SUMMARY</h1>
+        <form id="summaryForm">
+            <textarea id="summaryInput" rows="5" placeholder="เขียนสรุปเนื้อหาบทเรียนที่นี่..."></textarea>
+            <input type="file" id="imageInput" accept="image/*">
+            <button type="submit">บันทึกสรุป</button>
+        </form>
+        <div id="summaries"></div>
+    </div>
+    <script>
+        // Load summaries from localStorage
+        function loadSummaries() {
+            const summaries = JSON.parse(localStorage.getItem('summaries') || '[]');
+            const container = document.getElementById('summaries');
+            container.innerHTML = '';
+            summaries.forEach((item, idx) => {
+                const div = document.createElement('div');
+                div.className = 'summary';
+                div.innerHTML = `
+                    <div class="summary-text">
+                        <b>สรุป:</b> ${item.text}
+                        ${item.image ? `<div class="summary-image"><img src="${item.image}" alt="แนบรูป" style="max-width:100%;margin-top:1em;border-radius:8px;box-shadow:0 2px 8px #e0e7ff;"></div>` : ''}
+                    </div>
+                    <div class="comments" id="comments-${idx}">
+                        <b>ความคิดเห็น:</b>
+                        ${(item.comments || []).map(c => `<div class="comment">${c}</div>`).join('')}
+                        <form onsubmit="addComment(event, ${idx})" class="comment-form">
+                            <input type="text" placeholder="แสดงความคิดเห็น..." id="comment-input-${idx}" required>
+                            <button type="submit">คอมเมนต์</button>
+                        </form>
+                    </div>
+                    <div class="summary-actions">
+                        <div class="share-link">
+                            <button onclick="shareSummary(${idx})">แชร์</button>
+                            <span id="share-url-${idx}"></span>
+                        </div>
+                        <button class="delete-btn" onclick="deleteSummary(${idx})">ลบโพสต์</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Save summary
+        document.getElementById('summaryForm').onsubmit = function(e) {
+            e.preventDefault();
+            const text = document.getElementById('summaryInput').value.trim();
+            const imageInput = document.getElementById('imageInput');
+            if (!text && !imageInput.files.length) return;
+            if (imageInput.files.length > 0) {
+                const file = imageInput.files[0];
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    saveSummary(text, evt.target.result);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                saveSummary(text, null);
+            }
+        };
+
+        function saveSummary(text, image) {
+            const summaries = JSON.parse(localStorage.getItem('summaries') || '[]');
+            summaries.unshift({ text, image, comments: [] });
+            localStorage.setItem('summaries', JSON.stringify(summaries));
+            document.getElementById('summaryInput').value = '';
+            document.getElementById('imageInput').value = '';
+            loadSummaries();
+        }
+
+        // Add comment
+        window.addComment = function(e, idx) {
+            e.preventDefault();
+            const input = document.getElementById(`comment-input-${idx}`);
+            const comment = input.value.trim();
+            if (!comment) return;
+            const summaries = JSON.parse(localStorage.getItem('summaries') || '[]');
+            summaries[idx].comments = summaries[idx].comments || [];
+            summaries[idx].comments.push(comment);
+            localStorage.setItem('summaries', JSON.stringify(summaries));
+            input.value = '';
+            loadSummaries();
+        };
+
+        // Share summary (copy link with summary text as URL param)
+        window.shareSummary = function(idx) {
+            const summaries = JSON.parse(localStorage.getItem('summaries') || '[]');
+            const summary = summaries[idx];
+            const url = `${location.origin}${location.pathname}?summary=${encodeURIComponent(summary.text)}`;
+            navigator.clipboard.writeText(url);
+            document.getElementById(`share-url-${idx}`).textContent = 'ลิงก์ถูกคัดลอก!';
+            setTimeout(() => {
+                document.getElementById(`share-url-${idx}`).textContent = '';
+            }, 2000);
+        };
+
+        // Delete summary
+        window.deleteSummary = function(idx) {
+            if (!confirm('ต้องการลบโพสต์นี้ใช่หรือไม่?')) return;
+            const summaries = JSON.parse(localStorage.getItem('summaries') || '[]');
+            summaries.splice(idx, 1);
+            localStorage.setItem('summaries', JSON.stringify(summaries));
+            loadSummaries();
+        };
+
+        // If shared via URL param, show summary
+        window.onload = function() {
+            const params = new URLSearchParams(location.search);
+            if (params.has('summary')) {
+                document.getElementById('summaries').innerHTML = `
+                    <div class="summary">
+                        <div class="summary-text"><b>สรุป (แชร์):</b> ${params.get('summary')}</div>
+                    </div>
+                `;
+            } else {
+                loadSummaries();
+            }
+        };
+    </script>
+</body>
+</html>
