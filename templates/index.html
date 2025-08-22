@@ -2,12 +2,12 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <title>Education Summary</title>
+    <title>EduFile.</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>
 <body>
 <div class="container">
-    <h1>EDUCATION SUMMARY</h1>
+    <h1>EduFile.</h1>
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         <ul>
@@ -20,7 +20,7 @@
     <form id="summaryForm" method="post" enctype="multipart/form-data">
         <textarea name="summary" rows="4" placeholder="เขียนสรุปเนื้อหาบทเรียนที่นี่..." required></textarea>
         <input type="file" name="image" accept="image/*">
-        <button type="submit">บันทึกสรุป</button>
+        <button type="submit">Submit</button>
     </form>
     <div id="summaries">
         {% for s in summaries %}
@@ -34,7 +34,7 @@
                 {% endif %}
             </div>
             <div class="comments">
-                <b>ความคิดเห็น:</b>
+                <b>Comment:</b>
                 {% for c in comment_map.get(s.id, []) %}
                     <div class="comment">{{ c.text|e }}</div>
                 {% endfor %}
@@ -52,6 +52,7 @@
                 <form method="post" action="{{ url_for('delete', summary_id=s.id) }}" onsubmit="return confirm('ลบโพสต์นี้?');" style="display:inline;">
                     <button class="delete-btn" type="submit">ลบโพสต์</button>
                 </form>
+                
             </div>
         </div>
         {% endfor %}
