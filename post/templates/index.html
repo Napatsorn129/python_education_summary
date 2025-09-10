@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>EDU-FILE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+    <div class="logo">
+        <img src="{{ url_for('static', filename='edulogo.png') }}" alt="Logo" style="height:32px; vertical-align:middle; margin-right:8px;">
+    </div>
+    <div class="nav-links">
+        <a href="#">HOME</a>
+        <a href="#">SUBJECT</a>
+        <a href="#">SETTING</a>
+    </div>
+    <div class="user-menu">
+        <i class="fa fa-user"></i> UNAME
+    </div>    
+</nav>
+    <div class="container">
+        <form class="post-form" method="post" enctype="multipart/form-data">
+            <textarea name="summary" placeholder="พิมพ์ข้อความสรุป..." required></textarea>
+            <input type="file" name="file" accept=".pdf,image/*">
+            <button type="submit">โพสต์</button>
+        </form>
+        <div class="posts">
+            {% for post in posts %}
+            <div class="post">
+                <div class="post-header">
+                    <span class="post-username">UNAME</span>
+                </div>
+                <div class="post-content">
+                    <div class="post-text">{{ post.text|e }}</div>
+                    {% if post.file %}
+                        <div class="post-file">
+                            {% if post.file.endswith('.pdf') %}
+                                <a href="{{ url_for('static', filename='uploads/' + post.file) }}" target="_blank">
+                                    <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/file-pdf.svg" alt="PDF" class="file-icon">
+                                    {{ post.file }}
+                                </a>
+                            {% else %}
+                                <img src="{{ url_for('static', filename='uploads/' + post.file) }}" alt="แนบไฟล์" class="attached-img">
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="post-actions">
+                    <a href="{{ url_for('share', post_id=post.id) }}" target="_blank" class="share-btn">แชร์</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
