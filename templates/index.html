@@ -1,62 +1,37 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>EduFile.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-    <h1>EduFile.</h1>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
-        {% for message in messages %}
-          <li style="color:green;">{{ message }}</li>
-        {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-    <form id="summaryForm" method="post" enctype="multipart/form-data">
-        <textarea name="summary" rows="4" placeholder="เขียนสรุปเนื้อหาบทเรียนที่นี่..." required></textarea>
-        <input type="file" name="image" accept="image/*">
-        <button type="submit">Submit</button>
-    </form>
-    <div id="summaries">
-        {% for s in summaries %}
-        <div class="summary" id="post-{{s.id}}">
-            <div class="summary-text">
-                <b>สรุป:</b> {{ s.text|e }}
-                {% if s.image %}
-                <div class="summary-image">
-                    <img src="{{ url_for('static', filename='uploads/' + s.image) }}" alt="แนบรูป">
+    <div class="container">
+        <img src="{{ url_for('static', filename='edulogo.png') }}" alt="Logo" style="height:175px; vertical-align:middle; margin-left: -240px;">
+
+        <div class="form-card">
+            <h2>REGISTER</h2>
+            <form>
+                <div class="input-group">
+                    <label for="username">USERNAME</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
                 </div>
-                {% endif %}
-            </div>
-            <div class="comments">
-                <b>Comment:</b>
-                {% for c in comment_map.get(s.id, []) %}
-                    <div class="comment">{{ c.text|e }}</div>
-                {% endfor %}
-                <form method="post" action="{{ url_for('comment', summary_id=s.id) }}" class="comment-form">
-                    <input type="text" name="comment" placeholder="แสดงความคิดเห็น..." required>
-                    <button type="submit">คอมเมนต์</button>
-                </form>
-            </div>
-            <div class="summary-actions">
-                <div class="share-link">
-                    <a href="{{ url_for('share', summary_id=s.id) }}" target="_blank">
-                        <button type="button">แชร์</button>
-                    </a>
+                <div class="input-group">
+                    <label for="password">PASSWORD</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
                 </div>
-                <form method="post" action="{{ url_for('delete', summary_id=s.id) }}" onsubmit="return confirm('ลบโพสต์นี้?');" style="display:inline;">
-                    <button class="delete-btn" type="submit">ลบโพสต์</button>
-                </form>
-                
+                <div class="input-group">
+                    <label for="confirm-password">REPEAT PASSWORD</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="register-button">Register</button>
+            </form>
+            <div class="login-link">
+                Already have an account? <a href="#">Login</a>
             </div>
         </div>
-        {% endfor %}
     </div>
-</div>
 </body>
 </html>
