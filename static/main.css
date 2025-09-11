@@ -5,7 +5,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background: url("C:\Users\wawa\Downloads\bg_web.png") center top;
+    background: url('bg_web.png')center 25px;
 }
 
 .container {
