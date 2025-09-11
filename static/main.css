@@ -36,6 +36,7 @@ h2 {
 .input-group {
     text-align: left;
     margin-bottom: 15px;
+    font-weight: bold;
 }
 
 .input-group label {
