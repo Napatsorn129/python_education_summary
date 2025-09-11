@@ -12,15 +12,15 @@
     </div>
     <div class="nav-links">
         <a href="#">
-        <img src="{{ url_for('static', filename='home.png') }}" alt="Home" style="height:20px; vertical-align:middle; position: relative; top: -3px; gap: 10px;">   
-        <span style="position:relative; left: -7px;">HOME</span>
+        <img src="{{ url_for('static', filename='home.png') }}" alt="Home" style="height:20px; vertical-align:middle; position: relative; top: -3px; margin-left: -37px;">   
+        <span style="position:relative; left: -6px;">HOME</span>
     </a>
         <a href="#">
-        <img src="{{ url_for('static', filename='book.png') }}" alt="Subject" style="height:45px; vertical-align:middle; position: relative; margin-left: 15px; gap: 10px;">    
-        <span style="position:relative; left: -17px;">SUBJECT</span>
+        <img src="{{ url_for('static', filename='book.png') }}" alt="Subject" style="height:42px; vertical-align:middle; position: relative; margin-left: -37px;">    
+        <span style="position:relative; left: -16px;">SUBJECT</span>
     </a>
         <a href="#">
-        <img src="{{ url_for('static', filename='set.png') }}" alt="Setting" style="height:20px; vertical-align:middle; position: relative; top: -2px; gap: 10px;">    
+        <img src="{{ url_for('static', filename='set.png') }}" alt="Setting" style="height:20px; vertical-align:middle; position: relative; top: -2px; margin-left: -37px;">    
         <span style="position:relative; left: -5px;">SETTING</span>
     </a>
     </div>
@@ -29,6 +29,9 @@
     </div>    
 </nav>
     <div class="container">
+        <div class="user-menu">
+        <i class="fa fa-user"></i> UNAME
+    </div>
         <form class="post-form" method="post" enctype="multipart/form-data">
             <textarea name="summary" placeholder="พิมพ์ข้อความสรุป..." required></textarea>
             <input type="file" name="file" accept=".pdf,image/*">
