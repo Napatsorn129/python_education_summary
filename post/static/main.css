@@ -1,8 +1,7 @@
 body {
     font-family: 'Mitr', 'Noto Sans Thai', sans-serif;
   margin: 0;
-  background: linear-gradient(to bottom, #fdffff, #88a4b1);
-  min-height: 100vh;
+  background: url('bg_web.png')center 25px;
 }
 
 .navbar {
