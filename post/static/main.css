@@ -76,7 +76,6 @@ body {
 
 .file-upload-box {
     display: inline-block;
-    background: #e1eaf5;
     padding: 0.7em 1.2em;
     border-radius: 12px;
     margin-bottom: 1em;
@@ -223,12 +222,11 @@ body {
 
 .custom-file-label {
     display: inline-block;
-    background: #7b9acc;
+    background: #8eaab8;
     color: #fff;
     padding: 0.5em 1.5em;
     border-radius: 8px;
     font-size: 1.1em;
-    font-family: inherit;
     cursor: pointer;
     font-weight: bold;
     box-shadow: 0 2px 8px rgba(60, 80, 180, 0.08);
@@ -237,12 +235,13 @@ body {
 }
 
 .custom-file-label:hover {
-    background: #4e6fae;
+    background: #8eaab8;
     color: #fff;
 }
 
 .file-name-label {
     margin-left: 1em;
-    color: #4e6fae;
+    color: #787575;
     font-weight: bold;
+    font-size: 1.25em;
 }

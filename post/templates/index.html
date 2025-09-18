@@ -72,7 +72,7 @@
             {% endfor %}
         </div>
     </div>
-    <script>
+<script>
 const textarea = document.getElementById('summary-textarea');
 textarea.addEventListener('input', function() {
     this.style.height = 'auto';
@@ -80,8 +80,11 @@ textarea.addEventListener('input', function() {
 });
 document.getElementById('file-upload').addEventListener('change', function() {
     const fileName = this.files[0] ? this.files[0].name : 'ไม่มีไฟล์ที่เลือก';
-    document.getElementById('file-name').textContent = fileName;
-    });
+    const icon = `<img src="{{ url_for('static', filename='q.png') }}" alt="file icon" style="height: 30px; vertical-align: middle; margin-right: -3px;">`;
+    document.getElementById('file-name').innerHTML = fileName !== 'ไม่มีไฟล์ที่เลือก'
+        ? icon + '<b>' + fileName + '</b>'
+        : 'ไม่มีไฟล์ที่เลือก';
+});
 </script>
 </body>
 </html>
