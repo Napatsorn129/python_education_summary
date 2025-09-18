@@ -15,7 +15,7 @@ body {
 }
 
 .form-card {
-    background-color: #fffffff6;
+    background-color: #ffffff;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 20px 8px #375f94c9;
@@ -75,7 +75,7 @@ h2 {
 }
 
 .register-button:hover {
-    background-color: #0056b3;
+    background-color: rgba(93, 133, 198, 0.867);
 }
 
 .login-link {
