@@ -40,10 +40,10 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5em;
-    background: #b2c7e6;
+    background: #ffffff;
     padding: 0.3em 1em;
     border-radius: 1em;
-    color: #2d3e5e;
+    color: #8eaab8;
 }
 
 .container {
@@ -60,16 +60,20 @@ body {
     flex-direction: column;
     gap: 1em;
     margin-bottom: 2em;
+    font-weight: bold; 
 }
 
 .post-form textarea {
     resize: vertical;
     border-radius: 8px;
-    border: 1.5px solid #b2c7e6;
+    border: 1.7px solid #8eaab8;
     padding: 1em;
-    font-size: 1.1em;
+    font-size: 1.7em;
     min-height: 70px;
+    color: #749aac;
+    font-weight: bold; 
 }
+
 
 .post-form input[type="file"] {
     border: none;
@@ -78,14 +82,15 @@ body {
 
 .post-form button {
     align-self: flex-end;
-    background: #7b9acc;
+    background: #8eaab8;
     color: #fff;
     border: none;
     border-radius: 8px;
     padding: 0.6em 1.5em;
-    font-size: 1em;
+    font-size: 1.15em;
     cursor: pointer;
     transition: background 0.2s;
+    font-weight: bold;
 }
 
 .post-form button:hover {
@@ -175,7 +180,7 @@ body {
 }
 
 #summary-textarea {
-    min-height: 220px;
+    min-height: 250px;
     max-height: 950px;
     resize: none;
     overflow-y: auto;
