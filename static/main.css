@@ -22,7 +22,7 @@ body {
     text-align: center;
     max-width: 500px;
     margin: auto;
-    box-shadow: 0 15px 500px #6a7f8d; /* เงาสำหรับกรอบหลัก */
+    box-shadow: 0 15px 81px #6a7f8d; /* เงาสำหรับกรอบหลัก */
 }
 
 h2 {
@@ -93,4 +93,3 @@ h2 {
 .login-link a:hover {
     text-decoration: underline;
 }
-
