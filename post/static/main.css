@@ -74,10 +74,24 @@ body {
     font-weight: bold; 
 }
 
+.file-upload-box {
+    display: inline-block;
+    background: #e1eaf5;
+    padding: 0.7em 1.2em;
+    border-radius: 12px;
+    margin-bottom: 1em;
+}
 
 .post-form input[type="file"] {
     border: none;
-    background: none;
+    background: #e1eaf5;
+    color: #4e6fae;
+    padding: 0.5em 1.2em;
+    border-radius: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(60, 80, 180, 0.07);
+    font-weight: bold;
 }
 
 .post-form button {
@@ -205,4 +219,30 @@ body {
     min-height: 0.5px;
     max-height: 0.5px;
     margin-bottom: 0.7em;
+}
+
+.custom-file-label {
+    display: inline-block;
+    background: #7b9acc;
+    color: #fff;
+    padding: 0.5em 1.5em;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-family: inherit;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(60, 80, 180, 0.08);
+    transition: background 0.2s, color 0.2s;
+    border: none;
+}
+
+.custom-file-label:hover {
+    background: #4e6fae;
+    color: #fff;
+}
+
+.file-name-label {
+    margin-left: 1em;
+    color: #4e6fae;
+    font-weight: bold;
 }

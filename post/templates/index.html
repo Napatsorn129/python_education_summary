@@ -34,7 +34,14 @@
 </div>
         <form class="post-form" method="post" enctype="multipart/form-data">
             <textarea id="summary-textarea" name="summary" placeholder="พิมพ์ข้อความสรุป..." required></textarea>
-            <input type="file" name="file" accept=".pdf,image/*">
+            <div class="file-upload-box">
+  <input type="file" id="file-upload" name="file" accept=".pdf,image/*" hidden>
+  <label for="file-upload" class="custom-file-label">
+    <img src="{{ url_for('static', filename='z.png') }}" alt="file icon" style="height: 22px; vertical-align: middle; margin-right: -3px;">
+    เลือกไฟล์
+</label>
+  <span id="file-name" class="file-name-label">ไม่มีไฟล์ที่เลือก</span>
+</div>
             <button type="submit">POST!</button>
         </form>
         <div class="posts">
@@ -71,6 +78,10 @@ textarea.addEventListener('input', function() {
     this.style.height = 'auto';
     this.style.height = (this.scrollHeight) + 'px';
 });
+document.getElementById('file-upload').addEventListener('change', function() {
+    const fileName = this.files[0] ? this.files[0].name : 'ไม่มีไฟล์ที่เลือก';
+    document.getElementById('file-name').textContent = fileName;
+    });
 </script>
 </body>
 </html>
