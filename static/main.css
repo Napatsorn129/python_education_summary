@@ -5,7 +5,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background: url('bg_web.png')center 25px;
+    background: url('bg_web.png') center 25px;
 }
 
 .container {
@@ -17,20 +17,19 @@ body {
 .form-card {
     background-color: #ffffff;
     padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 20px 8px #375f94c9;
+    border-radius: 30px;
+    border: 7px solid #8aa6b8;
     text-align: center;
-        max-width: 500px;      /* เพิ่มขนาดกรอบสูงสุด */
-    margin: auto;          /* จัดให้อยู่ตรงกลาง */
-
+    max-width: 500px;
+    margin: auto;
+    box-shadow: 0 15px 500px #6a7f8d; /* เงาสำหรับกรอบหลัก */
 }
 
 h2 {
-    color: #8aa6b8;
+    color: #8aa6b8; /* ตรงนี้คือสีของคำว่า REGISTER */
     margin-bottom: 20px;
-    font-weight: 5000;
-    font-size: 36px;
-
+    font-weight: 900;
+    font-size: 40px;
 }
 
 .input-group {
@@ -41,7 +40,7 @@ h2 {
 
 .input-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
     color: #8aa6b8;
     font-size: 20px;
 }
@@ -53,7 +52,9 @@ h2 {
     border: 1px solid #8aa6b8;
     border-radius: 5px;
     font-size: 16px;
+    box-shadow: 0 0 5px rgba(138, 166, 184, 0.5); /* เพิ่มเงาฟุ้งๆ */
 }
+
 
 .input-group input:focus {
     outline: none;
@@ -70,7 +71,6 @@ h2 {
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.3s ease;
     margin-top: 10px;
 }
 
@@ -93,3 +93,4 @@ h2 {
 .login-link a:hover {
     text-decoration: underline;
 }
+
