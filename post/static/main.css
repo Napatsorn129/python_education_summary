@@ -49,9 +49,6 @@ body {
 .container {
     max-width: 1000px;
     margin: 2.5em auto;
-    background: #fff;
-    border-radius: 18px;
-    box-shadow: 0 8px 32px rgba(60, 80, 180, 0.12);
     padding: 2em 1.5em 2em 1.5em;
 }
 
@@ -112,9 +109,11 @@ body {
 }
 
 .posts {
-    display: flex;
-    flex-direction: column;
-    gap: 2em;
+   max-width: 1000px;
+    margin: 2em auto;
+    padding: 2em 1.5em 2em 1.5em;
+    margin-bottom: 4em;
+    
 }
 
 .post {
@@ -123,6 +122,7 @@ body {
     box-shadow: 0 2px 8px rgba(60, 80, 180, 0.07);
     padding: 1.2em 1.2em 1em 1.2em;
     border: 2px solid #e1eaf5;
+    margin-bottom: 2em;
 }
 
 .post-header {
@@ -141,10 +141,11 @@ body {
 
 .post-content {
     margin-bottom: 0.7em;
+    margin-top: 18px;
 }
 
 .post-text {
-    margin-bottom: 0.7em;
+    padding-bottom: 1.2em;
     font-size: 1.08em;
     color: #2d3e5e;
 }
@@ -156,7 +157,8 @@ body {
     background: #e1eaf5;
     border-radius: 8px;
     padding: 0.5em 1em;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.7em;
+    margin-top: 18px !important;
 }
 
 .file-icon {
@@ -177,28 +179,12 @@ body {
     gap: 1em;
 }
 
-.share-btn {
-    background: #7b9acc;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 0.3em 1em;
-    text-decoration: none;
-    font-size: 0.98em;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.share-btn:hover {
-    background: #4e6fae;
-}
-
 #summary-textarea {
-    min-height: 250px;
+    min-height: 220px;
     max-height: 950px;
     resize: none;
     overflow-y: auto;
-    width: 500;
+    width: 700;
 }
 
 .form-header {
@@ -244,4 +230,12 @@ body {
     color: #787575;
     font-weight: bold;
     font-size: 1.25em;
+}
+
+.post-form-container {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(60, 80, 180, 0.12);
+    padding: 2em 1.5em 2em 1.5em;
+    margin-bottom: -4.2em;
 }

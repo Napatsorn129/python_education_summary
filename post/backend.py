@@ -34,13 +34,6 @@ def index():
         return redirect(url_for('index'))
     return render_template('index.html', posts=posts)
 
-@app.route('/share/<int:post_id>')
-def share(post_id):
-    post = next((p for p in posts if p['id'] == post_id), None)
-    if not post:
-        return "ไม่พบโพสต์", 404
-    return render_template('share.html', summary={'text': post['text'], 'image': post['file']}, comments=[])
-
 if __name__ == '__main__':
     os.makedirs(UPLOAD_FOLDER, exist_ok=True)
     app.run(host='0.0.0.0', port=5000, debug=True)
