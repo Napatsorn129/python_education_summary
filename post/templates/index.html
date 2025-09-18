@@ -29,11 +29,11 @@
     </div>    
 </nav>
     <div class="container">
-        <div class="user-menu">
-        <i class="fa fa-user"></i> UNAME
-    </div>
+        <div class="form-header">
+    <i class="fa fa-user"></i> UNAME
+</div>
         <form class="post-form" method="post" enctype="multipart/form-data">
-            <textarea name="summary" placeholder="พิมพ์ข้อความสรุป..." required></textarea>
+            <textarea id="summary-textarea" name="summary" placeholder="พิมพ์ข้อความสรุป..." required></textarea>
             <input type="file" name="file" accept=".pdf,image/*">
             <button type="submit">โพสต์</button>
         </form>
@@ -41,7 +41,7 @@
             {% for post in posts %}
             <div class="post">
                 <div class="post-header">
-                    <span class="post-username">UNAME</span>
+                    <span class="post-header">UNAME</span>
                 </div>
                 <div class="post-content">
                     <div class="post-text">{{ post.text|e }}</div>
@@ -65,5 +65,12 @@
             {% endfor %}
         </div>
     </div>
+    <script>
+const textarea = document.getElementById('summary-textarea');
+textarea.addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = (this.scrollHeight) + 'px';
+});
+</script>
 </body>
 </html>

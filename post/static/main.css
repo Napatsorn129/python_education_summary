@@ -14,7 +14,7 @@ body {
     color: #fff;
     font-weight: bold;
     letter-spacing: 1px;
-    height: 22px;
+    height: 20px;
 }
 
 .logo {
@@ -47,7 +47,7 @@ body {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 1000px;
     margin: 2.5em auto;
     background: #fff;
     border-radius: 18px;
@@ -108,11 +108,16 @@ body {
 
 .post-header {
     font-weight: bold;
-    color: #4e6fae;
-    margin-bottom: 0.5em;
+    color: #3a4e6e;
+    background: #c7daf2;
+    border-radius: 16px 16px 0 0;
+    padding: 1em 1.5em;
+    font-size: 1.15em;
+    margin-bottom: 0;
     display: flex;
     align-items: center;
     gap: 0.5em;
+    border-bottom: 2px solid #b2c7e6;
 }
 
 .post-content {
@@ -167,4 +172,31 @@ body {
 
 .share-btn:hover {
     background: #4e6fae;
+}
+
+#summary-textarea {
+    min-height: 220px;
+    max-height: 950px;
+    resize: none;
+    overflow-y: auto;
+    width: 500;
+}
+
+.form-header {
+    font-weight: bold;
+    color: #ffffff;
+    background: #8eaab8;
+    border-radius: 24px;
+    padding: 1em 2em;
+    font-size: 0.9em;
+    margin-bottom: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7em;
+    border-bottom: 2px solid #b2c7e6;
+    width: auto;
+    min-width: 0;
+    min-height: 0.5px;
+    max-height: 0.5px;
+    margin-bottom: 0.7em;
 }
