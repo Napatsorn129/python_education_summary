@@ -51,21 +51,24 @@
         {% for post in posts %}
         <div class="post">
             <div class="post-header">
-                <span class="post-header">UNAME</span>
+                <span class="post-title">UNAME</span>
             </div>
             <div class="post-content">
                 <div class="post-text">{{ post.text|e }}</div>
                 {% if post.file %}
                     <div class="post-file">
-                        {% if post.file.endswith('.pdf') %}
-                            <a href="{{ url_for('static', filename='uploads/' + post.file) }}" target="_blank">
-                                <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/file-pdf.svg" alt="PDF" class="file-icon">
-                                {{ post.file }}
-                            </a>
-                        {% else %}
-                            <img src="{{ url_for('static', filename='uploads/' + post.file) }}" alt="แนบไฟล์" class="attached-img">
-                        {% endif %}
-                    </div>
+    {% if post.file.endswith('.pdf') %}
+        <a href="{{ url_for('static', filename='uploads/' + post.file) }}" target="_blank">
+            <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/file-pdf.svg" 
+                 alt="PDF" class="file-icon">
+            {{ post.file }}
+        </a>
+    {% else %}
+        <img src="{{ url_for('static', filename='uploads/' + post.file) }}" 
+             alt="แนบไฟล์" class="attached-img">
+    {% endif %}
+</div>
+
                 {% endif %}
             </div>
         </div>

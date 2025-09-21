@@ -117,26 +117,31 @@ body {
 }
 
 .post {
-    background: #f4f8fb;
-    border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(60, 80, 180, 0.07);
-    padding: 1.2em 1.2em 1em 1.2em;
-    border: 2px solid #e1eaf5;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(60, 80, 180, 0.12);
+    padding: 2em 1.5em 2em 1.5em;
     margin-bottom: 2em;
 }
 
 .post-header {
     font-weight: bold;
-    color: #3a4e6e;
-    background: #c7daf2;
-    border-radius: 16px 16px 0 0;
-    padding: 1em 1.5em;
-    font-size: 1.15em;
+    color: #ffffff;
+    background: #8eaab8;
+    border-radius: 24px;
+    padding: 1em 2em;
+    font-size: 0.9em;
     margin-bottom: 0;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 0.5em;
+    gap: 0.7em;
     border-bottom: 2px solid #b2c7e6;
+    width: auto;
+}
+
+.post-title {
+    font-size: 1em; 
+    color: #fff;
 }
 
 .post-content {
@@ -145,20 +150,46 @@ body {
 }
 
 .post-text {
-    padding-bottom: 1.2em;
-    font-size: 1.08em;
-    color: #2d3e5e;
+    resize: vertical;
+    border-radius: 8px;
+    padding: 1em;
+    font-size: 1.7em;
+    min-height: 70px;
+    color: #749aac;
+    font-weight: bold; 
 }
 
 .post-file {
     display: flex;
     align-items: center;
-    gap: 0.5em;
-    background: #e1eaf5;
-    border-radius: 8px;
-    padding: 0.5em 1em;
-    margin-bottom: 0.7em;
-    margin-top: 18px !important;
+    gap: 0.5em;      
+    border: 1px solid #749aac; /* เส้นขอบบาง ๆ */
+    border-radius: 12px;
+    padding: 0.6em 1em;
+    max-width: 400px;          /* ป้องกันลากยาวเกิน */
+    overflow: hidden;
+    font-weight : bold;           
+}
+
+.post-file a {
+    color: #749aac;
+    font-weight : bold;           
+    text-decoration: none;     /* ตัดเส้นใต้ */
+    font-weight: 500;
+    flex: 1;                   /* ขยายเต็มพื้นที่ */
+    white-space: nowrap;       /* ไม่ตัดบรรทัด */
+    overflow: hidden;          /* ตัดถ้ายาวเกิน */
+    text-overflow: ellipsis;   /* เติม ... */
+}
+
+.post-file a:hover {
+    text-decoration: underline; /* hover แล้วมีเส้นใต้ */
+}
+
+.file-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
 }
 
 .file-icon {
