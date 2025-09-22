@@ -5,6 +5,48 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>เลือกรายวิชา</title>
   <style>
+    .navbar {
+background: #8eaab8;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+padding: 0.7em 2em;
+color: #fff;
+font-weight: bold;
+letter-spacing: 1px;
+height: 20px;
+}
+
+.logo {
+font-size: 1.6em;
+letter-spacing: 2px;
+display: flex;
+flex-direction: row;
+}
+
+.nav-links a {
+color: #fff;
+text-decoration: none;
+margin: 0 1em;
+font-size: 1.1em;
+transition: text-shadow 0.2s;
+}
+
+.nav-links a:hover {
+text-shadow: 0 0 5px #fff;
+}
+
+.user-menu {
+display: flex;
+align-items: center;
+gap: 0.5em;
+background: #ffffff;
+padding: 0.3em 1em;
+border-radius: 1em;
+color: #8eaab8;
+}
+
     :root{
       --bg1: #e9f0f6;
       --bg2: #dbe7ef;
@@ -83,7 +125,7 @@
     }
 
     .card .subject{
-      font-size:28px;
+      font-size:50px;
       font-weight:700;
       color:#3a7b90;
       margin:0;
@@ -167,38 +209,54 @@
   </style>
 </head>
 <body>
+  <nav class="navbar">
+<div class="logo">
+<img src="{{ url_for('static', filename='edulogo.png') }}" alt="Logo" style="height:35px; vertical-align:middle; margin-right:8px;">
+</div>
+<div class="nav-links">
+<a href="#">
+<img src="{{ url_for('static', filename='home.png') }}" alt="Home" style="height:20px; vertical-align:middle; position: relative; top: -3px; margin-left: -37px;">
+<span style="position:relative; left: -6px;">HOME</span>
+</a>
+<a href="#">
+<img src="{{ url_for('static', filename='book.png') }}" alt="Subject" style="height:42px; vertical-align:middle; position: relative; margin-left: -37px;">
+<span style="position:relative; left: -16px;">SUBJECT</span>
+</a>
+<a href="#">
+<img src="{{ url_for('static', filename='set.png') }}" alt="Setting" style="height:20px; vertical-align:middle; position: relative; top: -2px; margin-left: -37px;">
+<span style="position:relative; left: -5px;">SETTING</span>
+</a>
+</div>
+<div class="user-menu">
+<i class="fa fa-user"></i> UNAME
+</div>
+</nav>
   <div class="container" role="main">
     <h1>เลือกรายวิชา</h1>
 
     <div class="grid" role="list">
       <button class="card math" role="listitem" data-subject="คณิตศาสตร์" aria-label="คณิตศาสตร์">
         <div class="subject">คณิต</div>
-        <div class="subdecor">∑</div>
       </button>
 
       <button class="card phys" role="listitem" data-subject="ฟิสิกส์" aria-label="ฟิสิกส์">
         <div class="subject">ฟิสิกส์</div>
-        <div class="subdecor">⚛</div>
       </button>
 
       <button class="card bio" role="listitem" data-subject="ชีววิทยา" aria-label="ชีววิทยา">
         <div class="subject">ชีว<br/>วิทยา</div>
-        <div class="subdecor">🧬</div>
       </button>
 
       <button class="card chem" role="listitem" data-subject="เคมี" aria-label="เคมี">
         <div class="subject">เคมี</div>
-        <div class="subdecor">⚗</div>
       </button>
 
       <button class="card hist" role="listitem" data-subject="ประวัติศาสตร์" aria-label="ประวัติศาสตร์">
         <div class="subject">ประวัติ<br/>ศาสตร์</div>
-        <div class="subdecor">🏺</div>
       </button>
 
       <button class="card thai" role="listitem" data-subject="ภาษาไทย" aria-label="ภาษาไทย">
         <div class="subject">ภาษา<br/>ไทย</div>
-        <div class="subdecor">ก-ฮ</div>
       </button>
     </div>
 
