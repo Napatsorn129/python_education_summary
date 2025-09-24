@@ -276,3 +276,34 @@ body {
     margin-bottom: -4.2em;
     border: 2px solid #749aac;
 }
+
+/* กล่องปุ่มโต้ตอบ */
+.interactions {
+  display: flex;
+  align-items: center;
+  gap: 8px;           /* ระยะห่างระหว่างปุ่ม */
+  margin: 10px 0;
+}
+
+/* กล่องคอมเมนต์ */
+.comment-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.comment-box input {
+  flex: 1;            /* ให้ input กินพื้นที่ที่เหลือ */
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* กล่องปุ่มแก้ไข/ลบ */
+.post-actions {
+  display: flex;
+  justify-content: flex-end; /* ชิดขวา */
+  gap: 8px;
+  margin-top: 10px;
+}
