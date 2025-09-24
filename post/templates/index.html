@@ -56,19 +56,20 @@
             <div class="post-content">
                 <div class="post-text">{{ post.text|e }}</div>
                 {% if post.file %}
-                    <div class="post-file">
+           <div class="post-file">
     {% if post.file.endswith('.pdf') %}
-        <a href="{{ url_for('static', filename='uploads/' + post.file) }}" target="_blank">
-            <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/file-pdf.svg" 
-                 alt="PDF" class="file-icon">
-            {{ post.file }}
+        <a href="{{ url_for('static', filename='uploads/' + post.file) }}" target="_blank" class="pdf-card">
+            <div class="pdf-icon">
+                <img src="{{ url_for('static', filename='doc.png') }}" alt=" "style="height:30px; width:30px; vertical-align: middle; margin-right: 1px; margin-top:-1px;">
+            </div>
+            <div class="pdf-info">
+                <p class="pdf-title">{{ post.file }}</p>
+            </div>
         </a>
     {% else %}
-        <img src="{{ url_for('static', filename='uploads/' + post.file) }}" 
-             alt="แนบไฟล์" class="attached-img">
+        <img src="{{ url_for('static', filename='uploads/' + post.file) }}" alt="แนบไฟล์" class="attached-img">
     {% endif %}
 </div>
-
                 {% endif %}
             </div>
 <div class="post-card">

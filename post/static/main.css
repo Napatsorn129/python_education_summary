@@ -277,15 +277,13 @@ body {
     border: 2px solid #749aac;
 }
 
-/* กล่องปุ่มโต้ตอบ */
 .interactions {
   display: flex;
   align-items: center;
-  gap: 8px;           /* ระยะห่างระหว่างปุ่ม */
+  gap: 8px;           
   margin: 10px 0;
 }
 
-/* กล่องคอมเมนต์ */
 .comment-box {
   display: flex;
   align-items: center;
@@ -294,16 +292,60 @@ body {
 }
 
 .comment-box input {
-  flex: 1;            /* ให้ input กินพื้นที่ที่เหลือ */
+  flex: 1;            
   padding: 6px;
   border: 1px solid #ccc;
   border-radius: 6px;
 }
 
-/* กล่องปุ่มแก้ไข/ลบ */
 .post-actions {
   display: flex;
-  justify-content: flex-end; /* ชิดขวา */
+  justify-content: flex-end; 
   gap: 8px;
   margin-top: 10px;
 }
+
+.pdf-card {
+    background-color: transparent; 
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;        
+    border-radius: 5px;           
+}
+
+.pdf-icon img {
+    height: 30px;
+    width: 30px;
+    margin-right: 8px;
+}
+
+
+.pdf-card:hover {
+    background: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px #ffffff;
+}
+
+.pdf-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pdf-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    color: #d22c26;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+}
+
+.pdf-label {
+    font-size: 12px;
+    color: #ffffff;
+}
+
