@@ -74,28 +74,18 @@
             </div>
 <div class="post-card">
   <div class="interactions">
-    <button class="btn" onclick="likePost(this)">👍 0</button>
-    <button class="btn" onclick="viewPost(this)">👁 0</button>
-    <button class="btn" onclick="commentPost(this)">💬 0</button>
+    <button class="btn" onclick="likePost(this)">👍 <span class="count">0</span></button>
+    <button class="btn">💬 <span class="count">0</span></button>
   </div>
-
-  <div class="comment-box">
-    <input type="text" placeholder="พิมพ์ความคิดเห็น...">
-    <button class="btn btn-primary" onclick="addComment(this.previousElementSibling)">โพสต์</button>
+   <div class="comment-box">
+      <input type="text" placeholder="พิมพ์ความคิดเห็น...">
+      <button class="btn btn-primary" onclick="addComment(this)">โพสต์</button>
   </div>
-
-  <!-- คอมเมนต์จะแสดงตรงนี้ -->
   <div class="comment-list"></div>
-
-  <div class="post-actions">
-    <button class="btn btn-edit" onclick="editPost(this)">✏️ แก้ไข</button>
-    <button class="btn btn-delete" onclick="deletePost(this)">🗑️ ลบ</button>
-  </div>
 </div>
-
-
         </div>
         {% endfor %}
+        
     </div>
 
 <script>
@@ -118,64 +108,63 @@ document.getElementById('file-upload').addEventListener('change', function() {
 
 // กดไลก์
 function likePost(button) {
-  let count = button.innerText.match(/\d+/)[0]; // ดึงตัวเลข
-  button.innerText = "👍 " + (parseInt(count) + 1);
-}
+  const countSpan = button.querySelector(".count");
+  let count = parseInt(countSpan.innerText);
 
-// กดดู (เพิ่มยอดวิว)
-function viewPost(button) {
-  let count = button.innerText.match(/\d+/)[0];
-  button.innerText = "👁 " + (parseInt(count) + 1);
+  // เช็คว่าปุ่มถูกกดแล้วหรือยัง
+  if (button.classList.contains("liked")) {
+    // ถ้าเคยกดแล้ว → ยกเลิกไลค์
+    countSpan.innerText = count - 1;
+    button.classList.remove("liked");
+  } else {
+    // ถ้ายังกดไม่เคยกด → ไลค์
+    countSpan.innerText = count + 1;
+    button.classList.add("liked");
+  }
 }
+const currentUser = "UNAME";
 
-// กดคอมเมนต์ (เพิ่มจำนวนคอมเมนต์)
-function commentPost(button) {
-  let count = button.innerText.match(/\d+/)[0];
-  button.innerText = "💬 " + (parseInt(count) + 1);
-}
+// โหลดคอมเมนต์จาก localStorage ตอนเปิดหน้า
+document.querySelectorAll(".post-card").forEach(postCard => {
+  const postId = postCard.dataset.postId;
+  const commentList = postCard.querySelector(".comment-list");
+  const commentCount = postCard.querySelector(".comment-count");
 
-// ----------------------------
-// ฟังก์ชันโพสต์คอมเมนต์ใหม่
-// ----------------------------
-function addComment(input) {
+  const saved = JSON.parse(localStorage.getItem("comments_" + postId)) || [];
+  saved.forEach(text => {
+    const p = document.createElement("p");
+    p.className = "comment";
+    p.innerHTML = `<b>${currentUser}:</b> ${text}`;
+    commentList.appendChild(p);
+  });
+  commentCount.innerText = saved.length;
+});
+
+function addComment(button) {
+  const postCard = button.closest(".post-card");
+  const postId = postCard.dataset.postId;
+  const input = postCard.querySelector("input");
   const text = input.value.trim();
   if (text === "") return;
 
-  // หาตำแหน่ง comment-list
-  const postCard = input.closest(".post-card");
   const commentList = postCard.querySelector(".comment-list");
 
-  // สร้าง <p> แสดงคอมเมนต์
   const p = document.createElement("p");
   p.className = "comment";
-  p.innerText = text;
-
+  p.innerHTML = `<b>${currentUser}:</b> ${text}`;
   commentList.appendChild(p);
 
-  // ล้างกล่อง input
   input.value = "";
+
+  const commentCount = postCard.querySelector(".comment-count");
+  let count = parseInt(commentCount.innerText) || 0;
+  commentCount.innerText = count + 1;
+
+  // บันทึกลง localStorage
+  const saved = JSON.parse(localStorage.getItem("comments_" + postId)) || [];
+  saved.push(text);
+  localStorage.setItem("comments_" + postId, JSON.stringify(saved));
 }
-
-// ----------------------------
-// ฟังก์ชันแก้ไขและลบ
-// ----------------------------
-function editPost(button) {
-  const postCard = button.closest(".post-card");
-  const postContent = postCard.querySelector(".post-content");
-
-  const newText = prompt("แก้ไขโพสต์:", postContent.innerText);
-  if (newText !== null) {
-    postContent.innerText = newText;
-  }
-}
-
-function deletePost(button) {
-  const postCard = button.closest(".post-card");
-  if (confirm("คุณแน่ใจว่าจะลบโพสต์นี้?")) {
-    postCard.remove();
-  }
-}
-
 </script>
 </body>
 </html>
