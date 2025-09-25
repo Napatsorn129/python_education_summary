@@ -1,3 +1,5 @@
+
+
 import os
 import sqlite3
 from flask import Flask, render_template, request, redirect, url_for, flash
@@ -8,6 +10,17 @@ app.secret_key = 'your_secret_key'
 
 # สร้างโฟลเดอร์เก็บรูปถ้ายังไม่มี
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+# ฟังก์ชัน login (ต้องอยู่หลังการสร้าง app)
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        # TODO: ตรวจสอบ username/password กับฐานข้อมูล
+        # ถ้าสำเร็จให้ redirect ไปหน้า index หรือหน้าอื่น
+        return redirect(url_for('index'))
+    return render_template('login.html')
 
 # ฟังก์ชันเชื่อมต่อฐานข้อมูล
 def get_db():
@@ -54,7 +67,7 @@ def index():
     comment_map = {}
     for c in comments:
         comment_map.setdefault(c['summary_id'], []).append(c)
-    return render_template("index.html", summaries=summaries, comment_map=comment_map)
+    return render_template("login.html", summaries=summaries, comment_map=comment_map)
 
 # ฟังก์ชันเพิ่มคอมเมนต์
 @app.route("/comment/<int:summary_id>", methods=["POST"])
@@ -82,8 +95,20 @@ def share(summary_id):
         comments = db.execute("SELECT * FROM comment WHERE summary_id=?", (summary_id,)).fetchall()
     return render_template("share.html", summary=summary, comments=comments)
 
+
+# ฟังก์ชัน register (ต้องอยู่ก่อนรันเว็บ)
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        # รับข้อมูลจากฟอร์ม
+        username = request.form['username']
+        password = request.form['password']
+        # ...บันทึกข้อมูลหรือประมวลผล...
+        return redirect(url_for('login'))
+    return render_template('register.html')
+
 # เริ่มรันเว็บ
 if __name__ == "__main__":
     init_db()
-    (app.run(port=5002))
+    app.run(port=5002)
     

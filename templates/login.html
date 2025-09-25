@@ -1,5 +1,5 @@
 
-    <title>Registration Form</title>
+    <title>login-link</title>
     <link rel="stylesheet" href="static/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -10,12 +10,12 @@
     <meta charset="UTF-8">  
     <img src="static/eduuS.png" alt="Logo" style="height:175px; vertical-align:middle; margin-left: -170px; margin-bottom: 50px;">
 
-    <meta namr('static', filename='eduuS') }}" alt="Logo" style="height:175px; vertical-align:middle; margin-left: -240px;">
+    <meta namr('static', filename='eduuS') }}" alt="Logo" style="height:175px; vertical-align:middle; margin-left: -1000px;">
 
 
         <div class="form-card">
-            <h2>REGISTER</h2>
-            <form>
+            <h2>Login</h2>
+            <form action="/login" method="post">
                 <div class="input-group">
                     <label for="username">USERNAME</label>
                     <input type="text" id="username" name="username" placeholder="Enter your username" required>
@@ -24,14 +24,11 @@
                     <label for="password">PASSWORD</label>
                     <input type="password" id="password" name="password" placeholder="Enter your password" required>
                 </div>
-                <div class="input-group">
-                    <label for="confirm-password">REPEAT PASSWORD</label>
-                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
-                </div>
-                <button type="submit" class="register-button">Register</button>
+               
+                <button type="submit" class="register-button">Login</button>
             </form>
             <div class="login-link">
-                Already have an account? <a href="#">Login</a>
+                ยังไม่มีบัญชี? <a href="/register">สมัครสมาชิก</a>
             </div>
         </div>
     </div>

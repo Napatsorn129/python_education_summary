@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="/static/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <img src="/static/eduuS.png" alt="Logo" style="height:175px; vertical-align:middle; margin-bottom: 50px; margin-left: -170px;">
+        <div class="form-card">
+            <h2>REGISTER</h2>
+            <form action="/register" method="post">
+                <div class="input-group">
+                    <label for="username">USERNAME</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">PASSWORD</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirm-password">REPEAT PASSWORD</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="register-button">Register</button>
+            </form>
+            <div class="login-link">
+                มีบัญชีแล้ว? <a href="/login">เข้าสู่ระบบ</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
