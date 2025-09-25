@@ -4,208 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>เลือกรายวิชา</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
   <style>
-    .navbar {
-background: #8eaab8;
-display: flex;
-flex-direction: row;
-align-items: center;
-justify-content: space-between;
-padding: 0.7em 2em;
-color: #fff;
-font-weight: bold;
-letter-spacing: 1px;
-height: 20px;
-}
 
-.logo {
-font-size: 1.6em;
-letter-spacing: 2px;
-display: flex;
-flex-direction: row;
-}
-
-.nav-links a {
-color: #fff;
-text-decoration: none;
-margin: 0 1em;
-font-size: 1.1em;
-transition: text-shadow 0.2s;
-}
-
-.nav-links a:hover {
-text-shadow: 0 0 5px #fff;
-}
-
-.user-menu {
-display: flex;
-align-items: center;
-gap: 0.5em;
-background: #ffffff;
-padding: 0.3em 1em;
-border-radius: 1em;
-color: #8eaab8;
-}
-
-    :root{
-      --bg1: #e9f0f6;
-      --bg2: #dbe7ef;
-      --card-bg: rgba(255,255,255,0.65);
-      --accent: #8aa7bd;
-      --glass-shadow: 0 6px 18px rgba(40,60,80,0.12);
-      --radius: 14px;
-      font-family: "Noto Sans Thai", "Sarabun", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-
-    html,body{
-      height:100%;
-      margin:0;
-      background: radial-gradient(1200px 400px at 10% 10%, #f6fbff 0%, transparent 10%),
-                  linear-gradient(180deg, var(--bg1), var(--bg2));
-      color:#254049;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
-
-    .container{
-      max-width:1000px;
-      margin:40px auto;
-      padding:28px;
-      text-align:center;
-    }
-
-    h1{
-      margin:6px 0 28px;
-      font-size:40px;
-      color:#d7eefc;
-      text-shadow: 0 2px 0 rgba(255,255,255,0.6), 0 6px 20px rgba(27,60,80,0.12);
-      letter-spacing:1px;
-    }
-
-    /* grid for subject cards */
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:22px;
-      align-items:stretch;
-    }
-
-    @media (max-width:800px){
-      .grid{ grid-template-columns: repeat(2, 1fr); }
-      h1{ font-size:34px; }
-    }
-    @media (max-width:480px){
-      .grid{ grid-template-columns: 1fr; gap:16px; }
-      .container{ padding:16px; }
-      h1{ font-size:28px; }
-    }
-
-    .card{
-      position:relative;
-      border-radius: var(--radius);
-      padding:18px;
-      min-height:220px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:flex-start;
-      cursor:pointer;
-      transition: transform .18s ease, box-shadow .18s ease;
-      background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.6));
-      box-shadow: var(--glass-shadow);
-      backdrop-filter: blur(6px) saturate(120%);
-      outline: none;
-      border: 1px solid rgba(255,255,255,0.45);
-    }
-
-    .card:focus,
-    .card:hover{
-      transform: translateY(-6px);
-      box-shadow: 0 18px 40px rgba(30,70,90,0.18);
-    }
-
-    .card .subject{
-      font-size:50px;
-      font-weight:700;
-      color:#3a7b90;
-      margin:0;
-    }
-
-    .card .subdecor{
-      position:absolute;
-      right:12px;
-      bottom:12px;
-      font-size:38px;
-      opacity:.18;
-      user-select:none;
-    }
-
-    /* different subtle backgrounds for variation */
-    .card.math{ background-image: linear-gradient(135deg, rgba(200,230,240,0.35), rgba(255,255,255,0.25)); }
-    .card.phys{ background-image: linear-gradient(135deg, rgba(220,240,230,0.25), rgba(255,255,255,0.25)); }
-    .card.bio{ background-image: linear-gradient(135deg, rgba(240,230,240,0.25), rgba(255,255,255,0.25)); }
-    .card.chem{ background-image: linear-gradient(135deg, rgba(240,235,220,0.25), rgba(255,255,255,0.25)); }
-    .card.hist{ background-image: linear-gradient(135deg, rgba(230,240,255,0.25), rgba(255,255,255,0.25)); }
-    .card.thai{ background-image: linear-gradient(135deg, rgba(225,240,230,0.25), rgba(255,255,255,0.25)); }
-
-    /* small caption under title */
-    .caption{
-      font-size:14px;
-      color:rgba(30,60,70,0.6);
-      margin-top:6px;
-    }
-
-    /* Modal */
-    .modal-backdrop{
-      position:fixed;
-      inset:0;
-      background:rgba(10,20,30,0.46);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:1200;
-      padding:20px;
-    }
-    .modal{
-      background:linear-gradient(180deg, #fff, #fbfeff);
-      padding:22px;
-      border-radius:12px;
-      width:100%;
-      max-width:480px;
-      box-shadow:0 18px 40px rgba(10,30,40,0.3);
-      text-align:left;
-      border:1px solid rgba(0,0,0,0.06);
-    }
-    .modal h2{ margin:0 0 8px; color:#12414f; }
-    .modal p{ margin:0 0 14px; color:#334f56; }
-    .modal .close{
-      display:inline-block;
-      padding:8px 14px;
-      border-radius:8px;
-      cursor:pointer;
-      border: none;
-      background:var(--accent);
-      color:white;
-      font-weight:600;
-    }
-    .modal .link{
-      display:inline-block;
-      margin-left:8px;
-      padding:8px 14px;
-      background:transparent;
-      border-radius:8px;
-      border:1px solid var(--accent);
-      color:var(--accent);
-      text-decoration:none;
-      font-weight:600;
-    }
-
-    /* small footer */
-    .note{
-      margin-top:18px;
-      font-size:13px;
-      color:rgba(40,60,70,0.5);
-    }
   </style>
 </head>
 <body>
@@ -236,27 +37,16 @@ color: #8eaab8;
 
     <div class="grid" role="list">
       <button class="card math" role="listitem" data-subject="คณิตศาสตร์" aria-label="คณิตศาสตร์">
-        <div class="subject">คณิต</div>
       </button>
-
       <button class="card phys" role="listitem" data-subject="ฟิสิกส์" aria-label="ฟิสิกส์">
-        <div class="subject">ฟิสิกส์</div>
       </button>
-
       <button class="card bio" role="listitem" data-subject="ชีววิทยา" aria-label="ชีววิทยา">
-        <div class="subject">ชีว<br/>วิทยา</div>
       </button>
-
       <button class="card chem" role="listitem" data-subject="เคมี" aria-label="เคมี">
-        <div class="subject">เคมี</div>
       </button>
-
       <button class="card hist" role="listitem" data-subject="ประวัติศาสตร์" aria-label="ประวัติศาสตร์">
-        <div class="subject">ประวัติ<br/>ศาสตร์</div>
       </button>
-
       <button class="card thai" role="listitem" data-subject="ภาษาไทย" aria-label="ภาษาไทย">
-        <div class="subject">ภาษา<br/>ไทย</div>
       </button>
     </div>
 
