@@ -1,95 +1,189 @@
 body {
-    font-family: 'prompt', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    font-family: 'Mitr', 'Noto Sans Thai', sans-serif;
     margin: 0;
-    background: url('bg_web.png') center 25px;
+    background: linear-gradient(135deg, #1f1c67 0%, #5b81ff 100%);
+    min-height: 100vh;
 }
 
 .container {
-    padding: 10px;
-    width: 100%;
-    max-width: 400px;
+    max-width: 700px;
+    margin: 3em auto;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(60, 80, 180, 0.12);
+    padding: 2.5em 2em 2em 2em;
 }
 
-.form-card {
-    background-color: #ffffff;
-    padding: 10px;
-    border-radius: 30px;
-    border: 7px solid #8aa6b8;
+h1 {
     text-align: center;
-    max-width: 500px;
-    margin: auto;
-    box-shadow: 0 15px 81px #6a7f8d; /* เงาสำหรับกรอบหลัก */
+    color: #3a4ca8;
+    margin-bottom: 1.5em;
+    letter-spacing: 2px;
 }
 
-h2 {
-    color: #8aa6b8; /* ตรงนี้คือสีของคำว่า REGISTER */
-    margin-bottom: 20px;
-    font-weight: 900;
-    font-size: 40px;
+#summaryForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-bottom: 2em;
 }
 
-.input-group {
-    text-align: left;
-    margin-bottom: 15px;
+#summaryInput {
+    resize: vertical;
+    border-radius: 8px;
+    border: 1.5px solid #ffffff;
+    padding: 1em;
+    font-size: 1.1em;
+    background: #000000;
+    transition: border 0.2s;
+}
+
+#summaryInput:focus {
+    border: 2px solid #3a4ca8;
+    outline: none;
+}
+
+#summaryForm button {
+    align-self: flex-end;
+    background: linear-gradient(90deg, #4f8cff 0%, #3a4ca8 100%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.7em 2em;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #2e4696;
+    transition: background 0.2s;
+}
+
+#summaryForm button:hover {
+    background: linear-gradient(90deg, #3a4ca8 0%, #4f8cff 100%);
+}
+
+.summary {
+    background: #f7faff;
+    padding: 1.5em 1.2em;
+    margin-bottom: 1.5em;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px #e0e7ff;
+    position: relative;
+}
+
+.summary-text {
+    font-size: 1.08em;
+    margin-bottom: 1em;
+    color: #2d355c;
+}
+
+.comments {
+    margin-top: 1em;
+    padding-left: 0.5em;
+}
+
+.comment {
+    background: #e6edff;
+    margin: 0.4em 0;
+    padding: 0.6em 1em;
+    border-radius: 6px;
+    color: #3a4ca8;
+    font-size: 0.98em;
+    box-shadow: 0 1px 4px #e0e7ff;
+}
+
+.comment-form {
+    display: flex;
+    gap: 0.5em;
+    margin-top: 0.7em;
+}
+
+.comment-form input[type="text"] {
+    flex: 1;
+    border-radius: 6px;
+    border: 1px solid #bfcfff;
+    padding: 0.5em 1em;
+    font-size: 1em;
+    background: #fff;
+    transition: border 0.2s;
+}
+
+.comment-form input[type="text"]:focus {
+    border: 2px solid #4f8cff;
+    outline: none;
+}
+
+.comment-form button {
+    background: #4f8cff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5em 1.2em;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.comment-form button:hover {
+    background: #3a4ca8;
+}
+
+.share-link {
+    margin-top: 1.2em;
+    text-align: right;
+}
+
+.share-link button {
+    background: #fff;
+    color: #3a4ca8;
+    border: 1.5px solid #3a4ca8;
+    border-radius: 6px;
+    padding: 0.4em 1.2em;
+    font-size: 0.98em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.share-link button:hover {
+    background: #3a4ca8;
+    color: #fff;
+}
+
+.share-link span {
+    margin-left: 1em;
+    color: #4f8cff;
+    font-size: 0.95em;
     font-weight: bold;
 }
-
-.input-group label {
-    display: block;
-    margin-bottom: 2px;
-    color: #8aa6b8;
-    font-size: 20px;
+.summary-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1em;
+    gap: 1em;
 }
 
-.input-group input {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid #8aa6b8;
-    border-radius: 5px;
-    font-size: 16px;
-    box-shadow: 0 0 5px rgba(125, 152, 169, 0.5); /* เพิ่มเงาฟุ้งๆ */
-}
-
-
-.input-group input:focus {
-    outline: none;
-    border-color: #326f87;
-}
-
-.register-button {
-    width: 100%;
-    padding: 12px;
-    background-color: #4e90b9;
-    color: #ffffff;
+.delete-btn {
+    background: #ff5c5c;
+    color: #fff;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: 700;
+    border-radius: 6px;
+    padding: 0.4em 1.2em;
+    font-size: 0.98em;
+    font-weight: bold;
     cursor: pointer;
-    margin-top: 10px;
+    transition: background 0.2s;
+    box-shadow: 0 2px 8px #ffe0e0;
 }
 
-.register-button:hover {
-    background-color: rgba(93, 133, 198, 0.867);
+.delete-btn:hover {
+    background: #d90429;
 }
 
-.login-link {
-    margin-top: 20px;
-    color: #8aa6b8;
-    font-size: 14px;
-}
-
-.login-link a {
-    color: #8aa6b8;
-    text-decoration: none;
-    font-weight: 700;
-}
-
-.login-link a:hover {
-    text-decoration: underline;
+.summary-image img {
+    display: block;
+    margin: 0 auto;
+    max-height: 300px;
+    object-fit: contain;
 }

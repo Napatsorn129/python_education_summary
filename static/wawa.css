@@ -1,0 +1,95 @@
+body {
+    font-family: 'prompt', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: url('bg_web.png') center 25px;
+}
+
+.container {
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-card {
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 30px;
+    border: 7px solid #8aa6b8;
+    text-align: center;
+    max-width: 500px;
+    margin: auto;
+    box-shadow: 0 15px 81px #6a7f8d; /* เงาสำหรับกรอบหลัก */
+}
+
+h2 {
+    color: #8aa6b8; /* ตรงนี้คือสีของคำว่า REGISTER */
+    margin-bottom: 20px;
+    font-weight: 900;
+    font-size: 40px;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 2px;
+    color: #8aa6b8;
+    font-size: 20px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #8aa6b8;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 0 5px rgba(125, 152, 169, 0.5); /* เพิ่มเงาฟุ้งๆ */
+}
+
+
+.input-group input:focus {
+    outline: none;
+    border-color: #326f87;
+}
+
+.register-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4e90b9;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.register-button:hover {
+    background-color: rgba(93, 133, 198, 0.867);
+}
+
+.login-link {
+    margin-top: 20px;
+    color: #8aa6b8;
+    font-size: 14px;
+}
+
+.login-link a {
+    color: #8aa6b8;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
