@@ -1,8 +1,16 @@
+
 body {
     font-family: 'Mitr', 'Noto Sans Thai', sans-serif;
     margin: 0;
-    background: url('bg_web.png')center 25px;
-    min-height: 100vh;
+  background: url('bg_web.png') no-repeat center center fixed;
+  background-size: cover;
+}
+fancy-title {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 1.5em;
+    letter-spacing: 2px;
+    font-weight: bold;
 }
 
 .container {
@@ -11,12 +19,12 @@ body {
     border-radius: 18px;
     padding: 2.5em 2em 2em 2em;
 }
-
 h1 {
     text-align: center;
-    color: #3a4ca8;
+    color: #000000;
     margin-bottom: 1.5em;
     letter-spacing: 2px;
+    font-weight: bold;
 }
 
 #summaryForm {
@@ -240,8 +248,8 @@ color: #8eaab8;
     html,body{
       height:100%;
       margin:0;
-      background: radial-gradient(1200px 400px at 10% 10%, #f6fbff 0%, transparent 10%),
-                  linear-gradient(180deg, var(--bg1), var(--bg2));
+  background: url('bg_web.png') no-repeat center center fixed;
+  background-size: cover;
       color:#254049;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
@@ -288,7 +296,7 @@ color: #8eaab8;
       min-width: 200px;
       height: 150px;
       width: 240px;
-      display:flex;
+      display:inline-block;
       flex-direction:column;
       justify-content:center;
       align-items:center;
@@ -301,7 +309,7 @@ color: #8eaab8;
       outline: none;
       border: 2.5px solid #fff;
       overflow: hidden;
-      margin: 10px auto;
+      margin-top: 40px;
       position: relative;
     }
     }
@@ -441,3 +449,33 @@ color: #8eaab8;
       font-size:13px;
       color:rgba(40,60,70,0.5);
     }
+.fancy-title {
+  font-size: 50px;
+  color: #8caaba; /* สีข้อความเข้ม */
+  font-weight: bold;
+  font-family: 'promt', 'Noto Sans Thai', sans-serif;
+  letter-spacing: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  display: inline-block;
+  text-shadow:
+    -3px -3px 0 #ffffff,
+     3px -3px 0 #ffffff,
+    -3px  3px 0 #ffffff,
+     3px  3px 0 #ffffff,
+    -3px  0px 0 #ffffff,
+     3px  0px 0 #ffffff,
+     0px -3px 0 #ffffff,
+     0px  3px 0 #ffffff;
+  box-shadow: none;
+  animation: none;
+margin-bottom: -2000px;
+}
+
+
+
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
