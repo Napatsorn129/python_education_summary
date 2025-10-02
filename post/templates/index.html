@@ -72,74 +72,88 @@
 </div>
                 {% endif %}
             </div>
-<div class="post-card">
+<div class="post-card" data-post-id="1">
   <div class="interactions">
-    <button class="btn" onclick="likePost(this)">👍 <span class="count">0</span></button>
-    <button class="btn">💬 <span class="count">0</span></button>
+    <button class="btn" onclick="likePost(this)">👍 <span class="like-count">0</span></button>
+    <button class="btn" onclick="toggleCommentBox(this)">💬 <span class="comment-count">0</span></button>
   </div>
-   <div class="comment-box">
-      <input type="text" placeholder="พิมพ์ความคิดเห็น...">
-      <button class="btn btn-primary" onclick="addComment(this)">โพสต์</button>
+
+  <div class="comment-box hidden">
+    <input type="text" placeholder="พิมพ์ความคิดเห็น...">
+    <button class="btn btn-primary" onclick="addComment(this)">โพสต์</button>
   </div>
+
   <div class="comment-list"></div>
 </div>
+
         </div>
         {% endfor %}
         
     </div>
 
 <script>
-const textarea = document.getElementById('summary-textarea');
-textarea.addEventListener('input', function() {
-    this.style.height = 'auto';
-    this.style.height = (this.scrollHeight) + 'px';
-});
-document.getElementById('file-upload').addEventListener('change', function() {
-    const fileName = this.files[0] ? this.files[0].name : 'ไม่มีไฟล์ที่เลือก';
-    const icon = `<img src="{{ url_for('static', filename='q.png') }}" alt="file icon" style="height: 30px; vertical-align: middle; margin-right: -3px;">`;
-    document.getElementById('file-name').innerHTML = fileName !== 'ไม่มีไฟล์ที่เลือก'
-        ? icon + '<b>' + fileName + '</b>'
-        : 'ไม่มีไฟล์ที่เลือก';
-});
-
- // ----------------------------
-// ฟังก์ชันโต้ตอบ (Like, View, Comment)
-// ----------------------------
-
-// กดไลก์
-function likePost(button) {
-  const countSpan = button.querySelector(".count");
-  let count = parseInt(countSpan.innerText);
-
-  // เช็คว่าปุ่มถูกกดแล้วหรือยัง
-  if (button.classList.contains("liked")) {
-    // ถ้าเคยกดแล้ว → ยกเลิกไลค์
-    countSpan.innerText = count - 1;
-    button.classList.remove("liked");
-  } else {
-    // ถ้ายังกดไม่เคยกด → ไลค์
-    countSpan.innerText = count + 1;
-    button.classList.add("liked");
-  }
-}
 const currentUser = "UNAME";
 
-// โหลดคอมเมนต์จาก localStorage ตอนเปิดหน้า
+// โหลดข้อมูลตอนเปิดหน้า
 document.querySelectorAll(".post-card").forEach(postCard => {
   const postId = postCard.dataset.postId;
+
+  // โหลด likes
+  let likes = JSON.parse(localStorage.getItem("likes_" + postId)) || 0;
+  const likeCount = postCard.querySelector(".like-count");
+  likeCount.innerText = likes;
+
+  // โหลด comments
+  const savedComments = JSON.parse(localStorage.getItem("comments_" + postId)) || [];
   const commentList = postCard.querySelector(".comment-list");
   const commentCount = postCard.querySelector(".comment-count");
+  commentCount.innerText = savedComments.length;
 
-  const saved = JSON.parse(localStorage.getItem("comments_" + postId)) || [];
-  saved.forEach(text => {
+  savedComments.forEach(text => {
     const p = document.createElement("p");
     p.className = "comment";
-    p.innerHTML = `<b>${currentUser}:</b> ${text}`;
+    p.innerHTML = `<b>${currentUser}:</b> <span class="comment-text">${text}</span>`;
     commentList.appendChild(p);
   });
-  commentCount.innerText = saved.length;
 });
 
+// toggle แสดง/ซ่อนกล่อง comment
+function toggleCommentBox(button) {
+  const postCard = button.closest(".post-card");
+  const commentBox = postCard.querySelector(".comment-box");
+  const commentList = postCard.querySelector(".comment-list");
+
+  // toggle input box
+  commentBox.classList.toggle("hidden");
+
+  // toggle list ด้วย
+  if (commentList.style.display === "none" || commentList.style.display === "") {
+    commentList.style.display = "block";
+  } else {
+    commentList.style.display = "none";
+  }
+}
+
+// กดไลค์
+function likePost(button) {
+  const postCard = button.closest(".post-card");
+  const postId = postCard.dataset.postId;
+  const likeCount = button.querySelector(".like-count");
+  let count = parseInt(likeCount.innerText) || 0;
+
+  if (button.classList.contains("liked")) {
+    count--;
+    button.classList.remove("liked");
+  } else {
+    count++;
+    button.classList.add("liked");
+  }
+
+  likeCount.innerText = count;
+  localStorage.setItem("likes_" + postId, count);
+}
+
+// เพิ่มคอมเมนต์
 function addComment(button) {
   const postCard = button.closest(".post-card");
   const postId = postCard.dataset.postId;
@@ -148,22 +162,26 @@ function addComment(button) {
   if (text === "") return;
 
   const commentList = postCard.querySelector(".comment-list");
-
   const p = document.createElement("p");
   p.className = "comment";
-  p.innerHTML = `<b>${currentUser}:</b> ${text}`;
+  p.innerHTML = `<b>${currentUser}:</b> <span class="comment-text">${text}</span>`;
   commentList.appendChild(p);
 
   input.value = "";
 
+  // อัปเดตจำนวนคอมเมนต์
   const commentCount = postCard.querySelector(".comment-count");
   let count = parseInt(commentCount.innerText) || 0;
-  commentCount.innerText = count + 1;
+  count++;
+  commentCount.innerText = count;
 
   // บันทึกลง localStorage
   const saved = JSON.parse(localStorage.getItem("comments_" + postId)) || [];
   saved.push(text);
   localStorage.setItem("comments_" + postId, JSON.stringify(saved));
+
+  // ให้โชว์ list ถ้าเคยซ่อนอยู่
+  commentList.style.display = "block";
 }
 </script>
 </body>

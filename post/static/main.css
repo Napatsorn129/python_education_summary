@@ -289,19 +289,48 @@ body {
   align-items: center;
   gap: 8px;
   margin-top: 10px;
+  
 }
 
 .comment-box input {
-  flex: 1;            
-  padding: 6px;
+  flex: 1;
+  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 6px;
+}
+
+.hidden {
+  display: none;
+}
+
+.comment {
+  background: #f0f2f5;
+  padding: 6px 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.comment-box .btn-primary {
+  background: #749aac;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;    /* ทำให้สูง+กว้างขึ้น */
+  min-width: 80px;      /* ความกว้างขั้นต่ำ */
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.comment-box .btn-primary:hover {
+  background: #ffffff;  /* สีน้ำเงินเข้มขึ้นเวลา hover */
 }
 
 .pdf-card {
     background-color: #f9f9f9; /* สีพื้นหลังอ่อนๆ ดูสะอาด */
     padding: 15px 20px;        /* เพิ่มระยะขอบให้ดูโปร่ง */
     display: flex;
+    color: #749aac;
     align-items: center;
     text-decoration: none;
     border-radius: 10px;       /* ให้โค้งมนมากขึ้น */
@@ -354,3 +383,39 @@ button.liked {
   color: blue;
   font-weight: bold;
 }
+
+.btn {
+  background: #f0f0f0;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;  /* ขยายขนาดปุ่ม */
+  font-size: 18px;     /* ขยายขนาดตัวอักษร */
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background: #749aac; 
+}
+
+.btn.liked {
+  background: #749aac;
+  color: white;
+}
+
+.comment b {
+  color: #749aac; 
+  font-weight: bold;
+}
+.comment-text {
+  color: #787575;   
+  font-weight: bold;
+}
+
+.comment-list {
+  display: none;
+  margin-top: 10px;
+}
+
+
+
