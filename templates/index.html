@@ -1,114 +1,62 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title class="fancy-title">เลือกรายวิชา</title>
-   <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-  <style>
-
-  </style>
+    <meta charset="UTF-8">
+    <title>EduFile.</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>
 <body>
-  <nav class="navbar">
-<div class="logo">
-<img src="{{ url_for('static', filename='edulogo.png') }}" alt="Logo" style="height:35px; vertical-align:middle; margin-right:8px;">
-</div>
-<div class="nav-links">
-<a href="#">
-<img src="{{ url_for('static', filename='home.png') }}" alt="Home" style="height:20px; vertical-align:middle; position: relative; top: -3px; margin-left: -37px;">
-<span style="position:relative; left: -6px;">HOME</span>
-</a>
-<a href="#">
-<img src="{{ url_for('static', filename='book.png') }}" alt="Subject" style="height:42px; vertical-align:middle; position: relative; margin-left: -37px;">
-<span style="position:relative; left: -16px;">SUBJECT</span>
-</a>
-<a href="#">
-<img src="{{ url_for('static', filename='set.png') }}" alt="Setting" style="height:20px; vertical-align:middle; position: relative; top: -2px; margin-left: -37px;">
-<span style="position:relative; left: -5px;">SETTING</span>
-</a>
-</div>
-<div class="user-menu">
-<i class="fa fa-user"></i> UNAME
-</div>
-</nav>
-  <div class="container" role="main">
-<h1 class="fancy-title">เลือกรายวิชา</h1>
-    <div class="grid" role="list">
-      <button class="card math" role="listitem" data-subject="คณิตศาสตร์" aria-label="คณิตศาสตร์">
-      </button>
-      <button class="card phys" role="listitem" data-subject="ฟิสิกส์" aria-label="ฟิสิกส์">
-      </button>
-      <button class="card bio" role="listitem" data-subject="ชีววิทยา" aria-label="ชีววิทยา">
-      </button>
-      <button class="card chem" role="listitem" data-subject="เคมี" aria-label="เคมี">
-      </button>
-      <button class="card hist" role="listitem" data-subject="ประวัติศาสตร์" aria-label="ประวัติศาสตร์">
-      </button>
-      <button class="card thai" role="listitem" data-subject="ภาษาไทย" aria-label="ภาษาไทย">
-      </button>
+<div class="container">
+    <h1>EduFile.</h1>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li style="color:green;">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <form id="summaryForm" method="post" enctype="multipart/form-data">
+        <textarea name="summary" rows="4" placeholder="เขียนสรุปเนื้อหาบทเรียนที่นี่..." required></textarea>
+        <input type="file" name="image" accept="image/*">
+        <button type="submit">Submit</button>
+    </form>
+    <div id="summaries">
+        {% for s in summaries %}
+        <div class="summary" id="post-{{s.id}}">
+            <div class="summary-text">
+                <b>สรุป:</b> {{ s.text|e }}
+                {% if s.image %}
+                <div class="summary-image">
+                    <img src="{{ url_for('static', filename='uploads/' + s.image) }}" alt="แนบรูป">
+                </div>
+                {% endif %}
+            </div>
+            <div class="comments">
+                <b>Comment:</b>
+                {% for c in comment_map.get(s.id, []) %}
+                    <div class="comment">{{ c.text|e }}</div>
+                {% endfor %}
+                <form method="post" action="{{ url_for('comment', summary_id=s.id) }}" class="comment-form">
+                    <input type="text" name="comment" placeholder="แสดงความคิดเห็น..." required>
+                    <button type="submit">คอมเมนต์</button>
+                </form>
+            </div>
+            <div class="summary-actions">
+                <div class="share-link">
+                    <a href="{{ url_for('share', summary_id=s.id) }}" target="_blank">
+                        <button type="button">แชร์</button>
+                    </a>
+                </div>
+                <form method="post" action="{{ url_for('delete', summary_id=s.id) }}" onsubmit="return confirm('ลบโพสต์นี้?');" style="display:inline;">
+                    <button class="delete-btn" type="submit">ลบโพสต์</button>
+                </form>
+                
+            </div>
+        </div>
+        {% endfor %}
     </div>
-
-  <!-- Modal -->
-  <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal" role="document">
-      <h2 id="modalTitle"></h2>
-      <p id="modalText">คุณสามารถเชื่อมต่อปุ่มนี้ไปยังหน้าเนื้อหา แบบทดสอบ หรือ API ได้ตามต้องการ</p>
-      <div>
-        <button class="close" id="modalClose">ปิด</button>
-        <a id="modalLink" class="link" href="#" onclick="return false;">ไปที่บทเรียน</a>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // หา element ทุกการ์ด
-    const cards = document.querySelectorAll('.card');
-    const backdrop = document.getElementById('modalBackdrop');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalClose = document.getElementById('modalClose');
-    const modalLink = document.getElementById('modalLink');
-
-    // คลิกการ์ด => แสดง modal
-    cards.forEach(card=>{
-      card.addEventListener('click', ()=> openSubject(card.dataset.subject));
-      // keyboard accessibility (Enter/Space)
-      card.addEventListener('keydown', (e)=>{
-        if(e.key === 'Enter' || e.key === ' '){
-          e.preventDefault();
-          openSubject(card.dataset.subject);
-        }
-      });
-      // make focusable
-      card.setAttribute('tabindex','0');
-    });
-
-    function openSubject(name){
-      modalTitle.textContent = name;
-      // ตัวอย่าง: เลือกลิงก์ตามวิชา (เปลี่ยนเป็น path จริงของคุณ)
-      const slug = name.replace(/\s+/g, '-').toLowerCase();
-      modalLink.href = `/subjects/${encodeURIComponent(slug)}`;
-      // แสดง modal
-      backdrop.style.display = 'flex';
-      backdrop.setAttribute('aria-hidden','false');
-      // focus ไปที่ปิดเพื่อ accessibility
-      modalClose.focus();
-    }
-
-    function closeModal(){
-      backdrop.style.display = 'none';
-      backdrop.setAttribute('aria-hidden','true');
-    }
-
-    modalClose.addEventListener('click', closeModal);
-    backdrop.addEventListener('click', (e)=>{
-      if(e.target === backdrop) closeModal();
-    });
-
-    // ESC ปิด modal
-    document.addEventListener('keydown', (e)=>{
-      if(e.key === 'Escape') closeModal();
-    });
-  </script>
+</div>
 </body>
 </html>
