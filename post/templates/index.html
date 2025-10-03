@@ -11,27 +11,29 @@
         <img src="{{ url_for('static', filename='edulogo.png') }}" alt="Logo" style="height:35px; vertical-align:middle; margin-right:8px;">
     </div>
     <div class="nav-links">
-        <a href="#">
+        <a href="{{ url_for('home') }}">
         <img src="{{ url_for('static', filename='home.png') }}" alt="Home" style="height:20px; vertical-align:middle; position: relative; top: -3px; margin-left: -37px;">   
         <span style="position:relative; left: -6px;">HOME</span>
     </a>
-        <a href="#">
-        <img src="{{ url_for('static', filename='book.png') }}" alt="Subject" style="height:42px; vertical-align:middle; position: relative; margin-left: -37px;">    
-        <span style="position:relative; left: -16px;">SUBJECT</span>
-    </a>
+        <a href="{{ url_for('sub') }}">
+    <img src="{{ url_for('static', filename='book.png') }}" alt="Subject" style="height:42px; vertical-align:middle; position: relative; margin-left: -37px;">    
+    <span style="position:relative; left: -16px;">SUBJECT</span>
+</a>
+
         <a href="#">
         <img src="{{ url_for('static', filename='set.png') }}" alt="Setting" style="height:20px; vertical-align:middle; position: relative; top: -2px; margin-left: -37px;">    
         <span style="position:relative; left: -5px;">SETTING</span>
     </a>
     </div>
     <div class="user-menu">
-        <i class="fa fa-user"></i> UNAME
-    </div>    
+<i class="fa fa-user"></i> {{ user }}
+</div>
+   
 </nav>
     <div class="container">
     <div class="post-form-container">
         <div class="form-header">
-            <i class="fa fa-user"></i> UNAME
+            <i class="fa fa-user"></i> {{ user }}
         </div>
         <form class="post-form" method="post" enctype="multipart/form-data">
             <textarea id="summary-textarea" name="summary" placeholder="พิมพ์ข้อความสรุป..." required></textarea>
@@ -51,24 +53,28 @@
         {% for post in posts %}
         <div class="post">
             <div class="post-header">
-                <span class="post-title">UNAME</span>
+                <i class="fa fa-user"></i> {{ user }}
             </div>
             <div class="post-content">
                 <div class="post-text">{{ post.text|e }}</div>
                 {% if post.file %}
            <div class="post-file">
+    {% if post.file %}
+<div class="post-file">
     {% if post.file.endswith('.pdf') %}
         <a href="{{ url_for('static', filename='uploads/' + post.file) }}" target="_blank" class="pdf-card">
             <div class="pdf-icon">
-                <img src="{{ url_for('static', filename='doc.png') }}" alt=" "style="height:30px; width:30px; vertical-align: middle; margin-right: 1px; margin-top:-1px;">
+                <img src="{{ url_for('static', filename='doc.png') }}" alt=" " style="height:30px; width:30px; vertical-align: middle; margin-right: 1px; margin-top:-1px;">
             </div>
             <div class="pdf-info">
-                <p class="pdf-title">{{ post.file }}</p>
+                <p class="pdf-title">{{ post.file.split('_', 1)[1] if '_' in post.file else post.file }}</p>
             </div>
         </a>
     {% else %}
         <img src="{{ url_for('static', filename='uploads/' + post.file) }}" alt="แนบไฟล์" class="attached-img">
     {% endif %}
+</div>
+{% endif %}
 </div>
                 {% endif %}
             </div>
@@ -92,18 +98,42 @@
     </div>
 
 <script>
-const currentUser = "UNAME";
+// แสดงชื่อไฟล์เมื่อเลือก
+const fileInput = document.getElementById('file-upload');
+const fileNameLabel = document.getElementById('file-name');
 
-// โหลดข้อมูลตอนเปิดหน้า
+fileInput.addEventListener('change', function() {
+  if (this.files && this.files.length > 0) {
+    const file = this.files[0];
+    fileNameLabel.textContent = file.name;
+    fileNameLabel.style.color = '#2c5f7c';
+    fileNameLabel.style.fontWeight = 'bold';
+    fileNameLabel.style.cursor = 'pointer';
+    
+    // คลิกเพื่อดูไฟล์
+    fileNameLabel.onclick = function() {
+      const url = URL.createObjectURL(file);
+      window.open(url, '_blank');
+    };
+  } else {
+    fileNameLabel.textContent = 'ไม่มีไฟล์ที่เลือก';
+    fileNameLabel.style.color = '#666';
+    fileNameLabel.style.fontWeight = 'normal';
+    fileNameLabel.style.cursor = 'default';
+    fileNameLabel.onclick = null;
+  }
+});
+
+// ส่วนคอมเมนต์และไลค์
+const currentUser = "{{ user }}";
+
 document.querySelectorAll(".post-card").forEach(postCard => {
   const postId = postCard.dataset.postId;
 
-  // โหลด likes
   let likes = JSON.parse(localStorage.getItem("likes_" + postId)) || 0;
   const likeCount = postCard.querySelector(".like-count");
   likeCount.innerText = likes;
 
-  // โหลด comments
   const savedComments = JSON.parse(localStorage.getItem("comments_" + postId)) || [];
   const commentList = postCard.querySelector(".comment-list");
   const commentCount = postCard.querySelector(".comment-count");
@@ -117,16 +147,13 @@ document.querySelectorAll(".post-card").forEach(postCard => {
   });
 });
 
-// toggle แสดง/ซ่อนกล่อง comment
 function toggleCommentBox(button) {
   const postCard = button.closest(".post-card");
   const commentBox = postCard.querySelector(".comment-box");
   const commentList = postCard.querySelector(".comment-list");
 
-  // toggle input box
   commentBox.classList.toggle("hidden");
 
-  // toggle list ด้วย
   if (commentList.style.display === "none" || commentList.style.display === "") {
     commentList.style.display = "block";
   } else {
@@ -134,7 +161,6 @@ function toggleCommentBox(button) {
   }
 }
 
-// กดไลค์
 function likePost(button) {
   const postCard = button.closest(".post-card");
   const postId = postCard.dataset.postId;
@@ -153,7 +179,6 @@ function likePost(button) {
   localStorage.setItem("likes_" + postId, count);
 }
 
-// เพิ่มคอมเมนต์
 function addComment(button) {
   const postCard = button.closest(".post-card");
   const postId = postCard.dataset.postId;
@@ -169,18 +194,15 @@ function addComment(button) {
 
   input.value = "";
 
-  // อัปเดตจำนวนคอมเมนต์
   const commentCount = postCard.querySelector(".comment-count");
   let count = parseInt(commentCount.innerText) || 0;
   count++;
   commentCount.innerText = count;
 
-  // บันทึกลง localStorage
   const saved = JSON.parse(localStorage.getItem("comments_" + postId)) || [];
   saved.push(text);
   localStorage.setItem("comments_" + postId, JSON.stringify(saved));
 
-  // ให้โชว์ list ถ้าเคยซ่อนอยู่
   commentList.style.display = "block";
 }
 </script>

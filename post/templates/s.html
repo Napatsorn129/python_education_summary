@@ -15,7 +15,7 @@
 <img src="{{ url_for('static', filename='edulogo.png') }}" alt="Logo" style="height:35px; vertical-align:middle; margin-right:8px;">
 </div>
 <div class="nav-links">
-<a href="#">
+<a href="{{ url_for('home') }}">
 <img src="{{ url_for('static', filename='home.png') }}" alt="Home" style="height:20px; vertical-align:middle; position: relative; top: -3px; margin-left: -37px;">
 <span style="position:relative; left: -6px;">HOME</span>
 </a>
@@ -29,7 +29,7 @@
 </a>
 </div>
 <div class="user-menu">
-<i class="fa fa-user"></i> UNAME
+<i class="fa fa-user"></i> {{ user }}
 </div>
 </nav>
   <div class="container" role="main">
