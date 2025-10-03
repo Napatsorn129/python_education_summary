@@ -99,6 +99,14 @@ def register():
                 flash("ชื่อผู้ใช้ซ้ำ")
     return render_template('register.html')
 
+@app.route('/home')
+def home():
+    return render_template("index.html")
+
+@app.route('/sub')
+def subject():
+    return render_template("s.html")
+
 # Logout
 @app.route("/logout")
 def logout():
