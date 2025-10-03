@@ -1,0 +1,470 @@
+body {
+    font-family: 'prompt', 'Noto Sans Thai', sans-serif;
+  margin: 0;
+  background: url('bg_web.png')center 25px;
+}
+
+.navbar {
+    background: #8eaab8;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7em 2em;
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 1px;
+    height: 20px;
+}
+
+.logo {
+    font-size: 1.6em;
+    letter-spacing: 2px;
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1em;
+    font-size: 1.1em;
+    transition: text-shadow 0.2s;
+}
+
+.nav-links a:hover {
+    text-shadow: 0 0 5px #fff;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    background: #ffffff;
+    padding: 0.3em 1em;
+    border-radius: 1em;
+    color: #8eaab8;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 2.5em auto;
+    padding: 2em 1.5em 2em 1.5em;
+    
+}
+
+.post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-bottom: 2em;
+    font-weight: bold;
+}
+
+.post-form textarea {
+    resize: vertical;
+    border-radius: 8px;
+    border: 1.7px solid #8eaab8;
+    padding: 1em;
+    font-size: 1.7em;
+    min-height: 70px;
+    color: #749aac;
+    font-weight: bold; 
+}
+
+.file-upload-box {
+    display: inline-block;
+    padding: 0.7em 1.2em;
+    border-radius: 12px;
+    margin-bottom: 1em;
+}
+
+.post-form input[type="file"] {
+    border: none;
+    background: #e1eaf5;
+    color: #4e6fae;
+    padding: 0.5em 1.2em;
+    border-radius: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(60, 80, 180, 0.07);
+    font-weight: bold;
+}
+
+.post-form button {
+    align-self: flex-end;
+    background: #8eaab8;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 0.6em 1.5em;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-weight: bold;
+}
+
+
+.post-form button:hover {
+    background: #4e6fae;
+}
+
+.posts {
+   max-width: 1000px;
+    margin: 2em auto;
+    padding: 2em 1.5em 2em 1.5em;
+    margin-bottom: 4em;
+    
+}
+
+.post {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(60, 80, 180, 0.12);
+    padding: 2em 1.5em 2em 1.5em;
+    margin-bottom: 2em;
+    border: 2px solid #749aac;
+}
+
+.post-header {
+    font-weight: bold;
+    color: #ffffff;
+    background: #8eaab8;
+    border-radius: 24px;
+    padding: 1em 2em;
+    font-size: 0.9em;
+    margin-bottom: -2em;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7em;
+    border-bottom: 2px solid #b2c7e6;
+    width: auto;
+}
+
+.post-title {
+    font-size: 1em; 
+    color: #fff;
+}
+
+.post-content {
+    margin-bottom: 0.7em;
+    margin-top: 18px;
+}
+
+.post-text {
+    resize: vertical;
+    border-radius: 8px;
+    padding: 1em;
+    font-size: 1.7em;
+    min-height: 70px;
+    color: #749aac;
+    font-weight: bold;
+    margin-bottom: -1em;
+     white-space: pre-line;
+}
+
+.post-file {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;      
+    border: 1px solid #749aac;
+    border-radius: 12px;
+    padding: 0.6em 1em;
+    max-width: 400px;
+    overflow: hidden;
+    font-weight : bold;           
+}
+
+.post-file a {
+    color: #749aac;
+    font-weight : bold;           
+    text-decoration: none;
+    font-weight: 500;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.post-file a:hover {
+    text-decoration: underline;
+}
+
+.file-icon {
+   text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: #0077b6;
+}
+
+.file-icon {
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+}
+
+.attached-img {
+    max-width: 180px;
+    max-height: 180px;
+    border-radius: 8px;
+    border: 1px solid #b2c7e6;
+}
+
+.post-actions {
+    display: flex;
+    gap: 1em;
+}
+
+#summary-textarea {
+    min-height: 220px;
+    max-height: 950px;
+    resize: none;
+    overflow-y: auto;
+    width: 700;
+}
+
+.form-header {
+    font-weight: bold;
+    color: #ffffff;
+    background: #8eaab8;
+    border-radius: 24px;
+    padding: 1em 2em;
+    font-size: 0.9em;
+    margin-bottom: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7em;
+    border-bottom: 2px solid #b2c7e6;
+    width: auto;
+    min-width: 0;
+    min-height: 0.5px;
+    max-height: 0.5px;
+    margin-bottom: 0.7em;
+}
+
+.custom-file-label {
+    display: inline-block;
+    background: #8eaab8;
+    color: #fff;
+    padding: 0.5em 1.5em;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(60, 80, 180, 0.08);
+    transition: background 0.2s, color 0.2s;
+    border: none;
+}
+
+.custom-file-label:hover {
+    background: #8eaab8;
+    color: #fff;
+}
+
+.file-name-label {
+    margin-left: 1em;
+    color: #787575;
+    font-weight: bold;
+    font-size: 1.25em;
+}
+
+.post-form-container {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(60, 80, 180, 0.12);
+    padding: 2em 1.5em 2em 1.5em;
+    margin-bottom: -4.2em;
+    border: 2px solid #749aac;
+}
+
+.interactions {
+  display: flex;
+  align-items: center;
+  gap: 8px;           
+  margin: 10px 0;
+}
+
+.comment-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  
+}
+
+.comment-box input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.hidden {
+  display: none;
+}
+
+.comment {
+  background: #f0f2f5;
+  padding: 6px 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.comment-box .btn-primary {
+  background: #749aac;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;    /* ทำให้สูง+กว้างขึ้น */
+  min-width: 80px;      /* ความกว้างขั้นต่ำ */
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.comment-box .btn-primary:hover {
+  background: #ffffff;  /* สีน้ำเงินเข้มขึ้นเวลา hover */
+}
+
+.pdf-card {
+    background-color: #f9f9f9; /* สีพื้นหลังอ่อนๆ ดูสะอาด */
+    padding: 15px 20px;        /* เพิ่มระยะขอบให้ดูโปร่ง */
+    display: flex;
+    color: #749aac;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 10px;       /* ให้โค้งมนมากขึ้น */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* เงานุ่มๆ เพิ่มมิติ */
+    transition: transform 0.2s, box-shadow 0.2s; /* ทำ effect เวลาชี้ */
+}
+
+.pdf-card:hover {
+    transform: translateY(-3px);           /* ลอยขึ้นเล็กน้อย */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* เงาเข้มขึ้นเวลาชี้ */
+    background-color: #fff;                /* เน้นความเด่นเมื่อ hover */
+}
+
+
+.pdf-icon img {
+    height: 30px;
+    width: 30px;
+    margin-right: 8px;
+}
+
+
+.pdf-card:hover {
+    background: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px #ffffff;
+}
+
+.pdf-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pdf-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    color: #d22c26;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+}
+
+.pdf-label {
+    font-size: 12px;
+    color: #ffffff;
+}
+button.liked {
+  color: blue;
+  font-weight: bold;
+}
+
+.btn {
+  background: #f0f0f0;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;  /* ขยายขนาดปุ่ม */
+  font-size: 18px;     /* ขยายขนาดตัวอักษร */
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background: #749aac; 
+}
+
+.btn.liked {
+  background: #749aac;
+  color: white;
+}
+
+.comment b {
+  color: #749aac; 
+  font-weight: bold;
+}
+.comment-text {
+  color: #787575;   
+  font-weight: bold;
+}
+
+.comment-list {
+  display: none;
+  margin-top: 10px;
+}
+
+/* Search Bar Styles */
+.search-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.search-box {
+    position: relative;
+    width: 100%;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 45px 12px 20px;
+    border: 2px solid #d1d5db;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: #749aac;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    pointer-events: none;
+}
+
+/* Add spacing to posts */
+.posts {
+    margin-top: 30px;
+}
+
+.post {
+    margin-bottom: 25px;
+}
+
+/* Hide posts that don't match search */
+.post.hidden {
+    display: none;
+}
+

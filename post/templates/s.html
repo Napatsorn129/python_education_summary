@@ -48,67 +48,40 @@
       <button class="card thai" role="listitem" data-subject="ภาษาไทย" aria-label="ภาษาไทย">
       </button>
     </div>
-
-  <!-- Modal -->
-  <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal" role="document">
-      <h2 id="modalTitle"></h2>
-      <p id="modalText">คุณสามารถเชื่อมต่อปุ่มนี้ไปยังหน้าเนื้อหา แบบทดสอบ หรือ API ได้ตามต้องการ</p>
-      <div>
-        <button class="close" id="modalClose">ปิด</button>
-        <a id="modalLink" class="link" href="#" onclick="return false;">ไปที่บทเรียน</a>
-      </div>
-    </div>
   </div>
 
   <script>
-    // หา element ทุกการ์ด
-    const cards = document.querySelectorAll('.card');
-    const backdrop = document.getElementById('modalBackdrop');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalClose = document.getElementById('modalClose');
-    const modalLink = document.getElementById('modalLink');
-
-    // คลิกการ์ด => แสดง modal
-    cards.forEach(card=>{
-      card.addEventListener('click', ()=> openSubject(card.dataset.subject));
-      // keyboard accessibility (Enter/Space)
-      card.addEventListener('keydown', (e)=>{
-        if(e.key === 'Enter' || e.key === ' '){
-          e.preventDefault();
-          openSubject(card.dataset.subject);
-        }
-      });
-      // make focusable
-      card.setAttribute('tabindex','0');
-    });
-
-    function openSubject(name){
-      modalTitle.textContent = name;
-      // ตัวอย่าง: เลือกลิงก์ตามวิชา (เปลี่ยนเป็น path จริงของคุณ)
-      const slug = name.replace(/\s+/g, '-').toLowerCase();
-      modalLink.href = `/subjects/${encodeURIComponent(slug)}`;
-      // แสดง modal
-      backdrop.style.display = 'flex';
-      backdrop.setAttribute('aria-hidden','false');
-      // focus ไปที่ปิดเพื่อ accessibility
-      modalClose.focus();
+// เพิ่มฟังก์ชันสำหรับปุ่มวิชา
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', function() {
+    const subject = this.dataset.subject;
+    
+    // กำหนด URL ตามวิชา
+    const subjectUrls = {
+      'คณิตศาสตร์': "{{ url_for('math') }}",
+      'ฟิสิกส์': "{{ url_for('physics') }}",
+      'ชีววิทยา': "{{ url_for('biology') }}",
+      'เคมี': "{{ url_for('chemistry') }}",
+      'ประวัติศาสตร์': "{{ url_for('history') }}",
+      'ภาษาไทย': "{{ url_for('thai') }}"
+    };
+    
+    // ไปยังหน้าที่กำหนด
+    if (subjectUrls[subject]) {
+      window.location.href = subjectUrls[subject];
     }
-
-    function closeModal(){
-      backdrop.style.display = 'none';
-      backdrop.setAttribute('aria-hidden','true');
+  });
+  
+  // keyboard accessibility
+  card.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      card.click();
     }
-
-    modalClose.addEventListener('click', closeModal);
-    backdrop.addEventListener('click', (e)=>{
-      if(e.target === backdrop) closeModal();
-    });
-
-    // ESC ปิด modal
-    document.addEventListener('keydown', (e)=>{
-      if(e.key === 'Escape') closeModal();
-    });
+  });
+  
+  card.setAttribute('tabindex','0');
+});
   </script>
 </body>
 </html>
