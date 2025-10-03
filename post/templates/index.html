@@ -59,12 +59,10 @@
                 <div class="post-text">{{ post.text|e }}</div>
                 {% if post.file %}
            <div class="post-file">
-    {% if post.file %}
-<div class="post-file">
     {% if post.file.endswith('.pdf') %}
         <a href="{{ url_for('static', filename='uploads/' + post.file) }}" target="_blank" class="pdf-card">
             <div class="pdf-icon">
-                <img src="{{ url_for('static', filename='doc.png') }}" alt=" " style="height:30px; width:30px; vertical-align: middle; margin-right: 1px; margin-top:-1px;">
+                <img src="{{ url_for('static', filename='doc.png') }}" alt=" "style="height:30px; width:30px; vertical-align: middle; margin-right: 1px; margin-top:-1px;">
             </div>
             <div class="pdf-info">
                 <p class="pdf-title">{{ post.file.split('_', 1)[1] if '_' in post.file else post.file }}</p>
@@ -74,11 +72,9 @@
         <img src="{{ url_for('static', filename='uploads/' + post.file) }}" alt="แนบไฟล์" class="attached-img">
     {% endif %}
 </div>
-{% endif %}
-</div>
                 {% endif %}
             </div>
-<div class="post-card" data-post-id="1">
+<div class="post-card" data-post-id="{{ post.id }}">
   <div class="interactions">
     <button class="btn" onclick="likePost(this)">👍 <span class="like-count">0</span></button>
     <button class="btn" onclick="toggleCommentBox(this)">💬 <span class="comment-count">0</span></button>
@@ -110,7 +106,6 @@ fileInput.addEventListener('change', function() {
     fileNameLabel.style.fontWeight = 'bold';
     fileNameLabel.style.cursor = 'pointer';
     
-    // คลิกเพื่อดูไฟล์
     fileNameLabel.onclick = function() {
       const url = URL.createObjectURL(file);
       window.open(url, '_blank');
