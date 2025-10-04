@@ -37,6 +37,21 @@
         </div>
         <form class="post-form" method="post" enctype="multipart/form-data">
             <textarea id="summary-textarea" name="summary" placeholder="พิมพ์ข้อความสรุป..." required></textarea>
+            
+            <!-- ส่วนเลือกหมวดหมู่วิชา -->
+            <div class="category-selection">
+                <label for="category">หมวดหมู่:</label>
+                <select id="category" name="category" required>
+                    <option value="">Select Subjects</option>
+                    <option value="math">Mathematics</option>
+                    <option value="physics">Physics</option>
+                    <option value="biology">Biology</option>
+                    <option value="chemistry">Chemistry</option>
+                    <option value="history">History</option>
+                    <option value="thai">Thai</option>
+                </select>
+            </div>
+            
             <div class="file-upload-box">
                 <input type="file" id="file-upload" name="file" accept=".pdf,image/*" hidden>
                 <label for="file-upload" class="custom-file-label">
@@ -52,9 +67,16 @@
 <div class="posts">
         {% for post in posts %}
         <div class="post">
-            <div class="post-header">
-                <i class="fa fa-user"></i> {{ user }}
-            </div>
+<div class="post-header">
+    <div class="user-info">
+        <i class="fa fa-user"></i> 
+        <span class="username">{{ user }}</span>
+    </div>
+    
+</div>
+{% if post.category_display %}
+        <span class="post-category {{ post.category_class }}">{{ post.category_display }}</span>
+        {% endif %}
             <div class="post-content">
                 <div class="post-text">{{ post.text|e }}</div>
                 {% if post.file %}

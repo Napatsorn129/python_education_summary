@@ -468,3 +468,42 @@ button.liked {
     display: none;
 }
 
+.post-category {
+    padding: 5px 15px;
+    background: white;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* หรือแบบมีสี */
+.post-category.math {
+    background: #FFD93D;
+    color: #1e3a8a;
+}
+
+.post-category.physics {
+    background: #FF6B9D;
+    color: white;
+}
+
+.post-category.biology {
+    background: #4ECDC4;
+    color: white;
+}
+
+.post-category.chemistry {
+    background: #95E1D3;
+    color: #1e3a8a;
+}
+
+.post-category.history {
+    background: #FFA07A;
+    color: white;
+}
+
+.post-category.thai {
+    background: #B4A7D6;
+    color: white;
+}

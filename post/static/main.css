@@ -136,7 +136,7 @@ body {
     margin-bottom: -2em;
     display: inline-flex;
     align-items: center;
-    gap: 0.7em;
+    gap: -10em;
     border-bottom: 2px solid #b2c7e6;
     width: auto;
 }
@@ -417,5 +417,76 @@ button.liked {
   margin-top: 10px;
 }
 
+.category-selection {
+    margin-bottom: 15px;
+}
 
+.category-selection label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 25px;
+    color: #749aac;
+}
+
+.category-selection select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #749aac;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: white;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.category-selection select:focus {
+    outline: none;
+    border-color: #749aac; 
+}
+
+.category-selection select:hover {
+    border-color: #749aac;
+}
+
+.post-category {
+    padding: 5px 15px;
+    background: white;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* หรือแบบมีสี */
+.post-category.math {
+    background: #FFD93D;
+    color: #1e3a8a;
+}
+
+.post-category.physics {
+    background: #FF6B9D;
+    color: white;
+}
+
+.post-category.biology {
+    background: #4ECDC4;
+    color: white;
+}
+
+.post-category.chemistry {
+    background: #95E1D3;
+    color: #1e3a8a;
+}
+
+.post-category.history {
+    background: #FFA07A;
+    color: white;
+}
+
+.post-category.thai {
+    background: #B4A7D6;
+    color: white;
+}
 

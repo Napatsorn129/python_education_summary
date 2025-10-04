@@ -43,8 +43,15 @@
         {% for post in posts %}
         <div class="post" data-post-text="{{ post.text|e }}" data-post-user="{{ user }}">
             <div class="post-header">
-                <i class="fa fa-user"></i> {{ user }}
-            </div>
+    <div class="user-info">
+        <i class="fa fa-user"></i> 
+        <span class="username">{{ user }}</span>
+    </div>
+    
+</div>
+{% if post.category_display %}
+        <span class="post-category {{ post.category_class }}">{{ post.category_display }}</span>
+        {% endif %}
             <div class="post-content">
                 <div class="post-text">{{ post.text|e }}</div>
                 {% if post.file %}
